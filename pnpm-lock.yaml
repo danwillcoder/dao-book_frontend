@@ -8,6 +8,9 @@ dependencies:
   '@fontsource/italiana':
     specifier: ^5.0.5
     version: 5.0.5
+  '@fontsource/libre-franklin':
+    specifier: ^5.0.5
+    version: 5.0.5
   eslint-plugin-prettier:
     specifier: ^4.2.1
     version: 4.2.1(eslint-config-prettier@8.8.0)(eslint@8.44.0)(prettier@2.8.8)
@@ -306,6 +309,10 @@ packages:
 
   /@fontsource/italiana@5.0.5:
     resolution: {integrity: sha512-Ch4sbscmHE2NS7UuWzuob+ZsMhcUXE2I1+m2afYCftqxfjn54UQBroUD7+pZ4w9aqXuVtBWsFJf51qRb3bPFxQ==}
+    dev: false
+
+  /@fontsource/libre-franklin@5.0.5:
+    resolution: {integrity: sha512-oOKAJYytEQ1xTp11dHMg7kV0idyFtv+kJFHsWu1D5od6dM0nxPxHIzrnZREQaDz7Se+bYs1wYtSlhrt1PwYCtQ==}
     dev: false
 
   /@humanwhocodes/config-array@0.11.10:
