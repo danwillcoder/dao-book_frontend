@@ -13,10 +13,12 @@
     "@fontsource/italiana": "^5.0.5",
     "@fontsource/libre-franklin": "^5.0.5",
     "eslint-plugin-prettier": "^4.2.1",
+    "mongoose": "^7.3.2",
     "prettier": "2.8",
     "prettier-plugin-tailwindcss": "^0.3.0",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.14.1"
   },
   "devDependencies": {
     "@types/react": "^18.2.14",
