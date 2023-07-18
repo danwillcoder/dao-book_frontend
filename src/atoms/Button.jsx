@@ -6,12 +6,13 @@ import propTypes from 'prop-types';
  @type {Object}
  @property {'dark'|'neutral'|'inverted'|'light'} theme 
  @property {string} buttonText 
+ @property {React.MouseEventHandler<HTMLButtonElement>} clickHandler
  */
 
 /**
  * @param {buttonProps} props
  */
-function Button({ theme, buttonText }) {
+function Button({ theme, buttonText, clickHandler }) {
   const stylesOnEveryButton =
     'w-32 rounded-2xl border-4 px-2 py-2 font-sans font-semibold shadow-md';
 
@@ -31,12 +32,17 @@ function Button({ theme, buttonText }) {
 
   const finalStyles = classNames(stylesOnEveryButton, buttonThemeStyles);
 
-  return <button className={finalStyles}>{buttonText}</button>;
+  return (
+    <button className={finalStyles} onClick={clickHandler}>
+      {buttonText}
+    </button>
+  );
 }
 
 Button.propTypes = {
   theme: propTypes.string,
   buttonText: propTypes.string,
+  clickHandler: propTypes.func,
 };
 
 export default Button;
