@@ -7,14 +7,17 @@ import propTypes from 'prop-types';
  @property {'dark'|'neutral'|'inverted'|'light'} theme 
  @property {string} buttonText 
  @property {React.MouseEventHandler<HTMLButtonElement>} clickHandler
+ @property {boolean} isFullWidth 
  */
 
 /**
  * @param {buttonProps} props
  */
-function Button({ theme, buttonText, clickHandler }) {
+function Button({ theme, buttonText, clickHandler, isFullWidth }) {
   const stylesOnEveryButton =
-    'w-32 rounded-2xl border-4 px-2 py-2 font-sans font-semibold shadow-md';
+    'rounded-2xl border-4 px-2 py-2 font-sans font-semibold shadow-md';
+
+  const widthFixed = isFullWidth ? 'w-full' : 'w-32';
 
   let buttonThemeStyles;
 
@@ -32,7 +35,11 @@ function Button({ theme, buttonText, clickHandler }) {
       'border-daobook-amber text-daobook-amber transition-colors transition-transform hover:scale-105 hover:bg-black/5 focus:ring dark:bg-black';
   }
 
-  const finalStyles = classNames(stylesOnEveryButton, buttonThemeStyles);
+  const finalStyles = classNames(
+    stylesOnEveryButton,
+    buttonThemeStyles,
+    widthFixed
+  );
 
   return (
     <button className={finalStyles} onClick={clickHandler}>
@@ -45,6 +52,7 @@ Button.propTypes = {
   theme: propTypes.string,
   buttonText: propTypes.string,
   clickHandler: propTypes.func,
+  isFullWidth: propTypes.bool,
 };
 
 export default Button;

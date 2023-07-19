@@ -16,6 +16,7 @@ function KitchenSink() {
           <p className="inline pr-2">Light</p>
           <Button buttonText="Sign In" theme="light" />
         </div>
+        <Button buttonText="Sign In" theme="light" isFullWidth={true} />
       </div>
     </>
   );
