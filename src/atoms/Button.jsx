@@ -20,14 +20,16 @@ function Button({ theme, buttonText, clickHandler }) {
 
   if (theme === 'dark') {
     buttonThemeStyles =
-      'border-daobook-amber bg-daobook-amber text-white dark:text-black';
+      'border-daobook-amber bg-daobook-amber text-white dark:text-black transition-colors transition-transform hover:scale-105 hover:bg-daobook-amber/80';
   } else if (theme === 'neutral') {
-    buttonThemeStyles = 'border-[#E3E3E3] bg-white text-black dark:bg-black';
+    buttonThemeStyles =
+      'border-[#E3E3E3] bg-white text-black dark:bg-black transition-colors transition-transform hover:scale-105 hover:bg-black/5 dark:hover:bg-white/90';
   } else if (theme === 'inverted') {
     buttonThemeStyles =
-      'border-white bg-daobook-amber text-white dark:border-black dark:text-black';
+      'border-white bg-daobook-amber text-white dark:border-black dark:text-black transition-colors transition-transform hover:scale-105 hover:bg-daobook-amber/80';
   } else if (theme === 'light') {
-    buttonThemeStyles = 'border-daobook-amber text-daobook-amber dark:bg-black';
+    buttonThemeStyles =
+      'border-daobook-amber text-daobook-amber transition-colors transition-transform hover:scale-105 hover:bg-black/5 dark:bg-black';
   }
 
   const finalStyles = classNames(stylesOnEveryButton, buttonThemeStyles);
