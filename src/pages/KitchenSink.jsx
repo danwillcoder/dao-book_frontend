@@ -1,4 +1,5 @@
-import Button from '../atoms/Button';
+import Button from "../atoms/Button";
+import TitleLockup from "../atoms/TitleLockup";
 
 function KitchenSink() {
   return (
@@ -17,6 +18,14 @@ function KitchenSink() {
           <Button buttonText="Sign In" theme="light" />
         </div>
         <Button buttonText="Sign In" theme="light" isFullWidth={true} />
+      </div>
+      <div className="grid grid-cols-2 items-center gap-2 bg-daobook-amber p-4">
+        <p className="text-end text-white">Light with subtitle</p>
+        <TitleLockup theme="light" isSubtitled={true} />
+        <p className="text-end text-white">Light no subtitle</p>
+        <TitleLockup theme="light" isSubtitled={false} />
+        <p className="text-end text-white">Dark with subtitle</p>
+        <TitleLockup theme="dark" isSubtitled={true} />
       </div>
     </>
   );
