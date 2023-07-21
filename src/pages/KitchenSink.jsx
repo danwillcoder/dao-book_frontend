@@ -1,4 +1,5 @@
 import Button from "../atoms/Button";
+import DashboardButton from "../atoms/DashboardButton";
 import TitleLockup from "../atoms/TitleLockup";
 
 function KitchenSink() {
@@ -26,6 +27,12 @@ function KitchenSink() {
         <TitleLockup theme="light" isSubtitled={false} />
         <p className="text-end text-white">Dark with subtitle</p>
         <TitleLockup theme="dark" isSubtitled={true} />
+      </div>
+      <div className="m-4 flex min-h-[200px] w-1/6 gap-8">
+        <p className="inline pr-2">Dashboard Button </p>
+        <DashboardButton buttonText="Initial Consult" />
+        <DashboardButton buttonText="Return Consult" />
+        <DashboardButton buttonText="Patient List" />
       </div>
     </>
   );
