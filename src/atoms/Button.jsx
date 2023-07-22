@@ -23,16 +23,16 @@ function Button({ theme, buttonText, clickHandler, isFullWidth }) {
 
   if (theme === "dark") {
     buttonThemeStyles =
-      "border-daobook-amber bg-daobook-amber text-white dark:text-black transition-colors transition-transform hover:scale-105 hover:bg-daobook-amber/80 focus:ring";
+      "border-daobook-amber bg-daobook-amber text-white dark:border-daobook-amber-dark transition-colors transition-transform hover:scale-105 hover:bg-daobook-amber/80 focus:ring";
   } else if (theme === "neutral") {
     buttonThemeStyles =
-      "border-[#E3E3E3] bg-white text-black dark:bg-black transition-colors transition-transform hover:scale-105 hover:bg-black/5 focus:ring dark:hover:bg-white/90";
+      "border-[#E3E3E3] bg-white text-black dark:text-white dark:bg-black/50 transition-colors transition-transform hover:scale-105 hover:bg-black/5 focus:ring dark:hover:bg-black/70";
   } else if (theme === "inverted") {
     buttonThemeStyles =
       "border-white bg-daobook-amber text-white dark:border-black dark:text-black transition-colors transition-transform hover:scale-105 focus:ring hover:bg-daobook-amber/80";
   } else if (theme === "light") {
     buttonThemeStyles =
-      "border-daobook-amber text-daobook-amber transition-colors transition-transform hover:scale-105 hover:bg-black/5 focus:ring dark:bg-black";
+      "border-daobook-amber text-daobook-amber transition-colors transition-transform hover:scale-105 hover:bg-black/75 focus:ring dark:bg-black";
   }
 
   const finalStyles = classNames(
@@ -42,7 +42,10 @@ function Button({ theme, buttonText, clickHandler, isFullWidth }) {
   );
 
   return (
-    <button className={finalStyles} onClick={clickHandler}>
+    <button
+      className={finalStyles}
+      onClick={clickHandler}
+    >
       {buttonText}
     </button>
   );
