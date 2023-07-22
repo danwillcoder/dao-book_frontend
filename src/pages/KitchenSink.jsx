@@ -1,5 +1,6 @@
 import Button from "../atoms/Button";
 import DashboardButton from "../atoms/DashboardButton";
+import SectionHeading from "../atoms/SectionHeading";
 import TitleLockup from "../atoms/TitleLockup";
 import FormInput from "../molecules/FormInput";
 
@@ -69,6 +70,14 @@ function KitchenSink() {
         <FormInput
           labelText="Password"
           placeholderText="*****"
+        />
+      </div>
+      <div className="m-4 flex gap-8">
+        <p className="inline pr-2">Section Heading</p>
+        <SectionHeading sectionText="Example section para" />
+        <SectionHeading
+          sectionText="Example section heading"
+          isH1={true}
         />
       </div>
     </>
