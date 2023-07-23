@@ -13,7 +13,7 @@ import propTypes from "prop-types";
 /**
  * @param {buttonProps} props
  */
-function Button({ theme, buttonText, clickHandler, isFullWidth }) {
+function Button({ theme, buttonText, onClick, isFullWidth }) {
   const stylesOnEveryButton =
     "rounded-2xl border-4 px-2 py-2 font-sans font-semibold shadow-md";
 
@@ -44,7 +44,7 @@ function Button({ theme, buttonText, clickHandler, isFullWidth }) {
   return (
     <button
       className={finalStyles}
-      onClick={clickHandler}
+      onClick={onClick}
     >
       {buttonText}
     </button>
