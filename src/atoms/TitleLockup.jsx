@@ -5,6 +5,8 @@ import propTypes from "prop-types";
  @typedef titleProps
  @type {Object}
  @property {"dark"|"light"} theme 
+ @property {boolean} isSubtitled
+ @property {boolean} isSmall
  */
 
 /**
