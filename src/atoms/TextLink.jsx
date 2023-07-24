@@ -3,8 +3,10 @@ import { Link } from "react-router-dom";
 function TextLink({ paragraphText, linkText, linkDestination }) {
   return (
     <p>
-      {paragraphText}
-      <Link to={linkDestination}>{linkText}</Link>
+      {paragraphText && paragraphText}
+      {linkText && linkDestination && (
+        <Link to={linkDestination}>{linkText}</Link>
+      )}
     </p>
   );
 }
