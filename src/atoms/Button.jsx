@@ -6,7 +6,7 @@ import propTypes from "prop-types";
  @type {Object}
  @property {"dark"|"neutral"|"inverted"|"light"} theme 
  @property {string} buttonText 
- @property {React.MouseEventHandler<HTMLButtonElement>} clickHandler
+ @property {React.MouseEventHandler<HTMLButtonElement>} onClick
  @property {boolean} isFullWidth 
  */
 
