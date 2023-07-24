@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from "vitest";
-import { render, cleanup, screen, fireEvent } from "@testing-library/react";
+import { render, screen, fireEvent } from "@testing-library/react";
 
 import Button from "./Button";
 
