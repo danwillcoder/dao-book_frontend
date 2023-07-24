@@ -32,7 +32,7 @@ function Button({ theme, buttonText, onClick, isFullWidth }) {
       "border-white bg-daobook-amber text-white dark:border-black dark:text-black transition-colors transition-transform hover:scale-105 focus:ring hover:bg-daobook-amber/80";
   } else if (theme === "light") {
     buttonThemeStyles =
-      "border-daobook-amber text-daobook-amber transition-colors transition-transform hover:scale-105 hover:bg-black/75 focus:ring dark:bg-black";
+      "border-daobook-amber text-daobook-amber bg-white transition-colors transition-transform hover:scale-105 hover:bg-white/75 focus:ring dark:bg-black dark:text-white";
   }
 
   const finalStyles = classNames(
