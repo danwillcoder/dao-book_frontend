@@ -9,6 +9,11 @@ describe("Title Lockup", () => {
     expect(screen.getByText("Dao Book")).toBeInTheDocument();
   });
 
+  it("correctly resizes h1", () => {
+    render(<TitleLockup isSmall={true}></TitleLockup>);
+    expect(screen.getByText("Dao Book")).toHaveClass("text-7xl");
+  });
+
   it("shows the light theme", () => {
     render(
       <TitleLockup

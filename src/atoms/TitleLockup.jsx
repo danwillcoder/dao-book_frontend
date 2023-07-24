@@ -10,8 +10,8 @@ import propTypes from "prop-types";
 /**
  * @param {titleProps} props
  */
-function TitleLockup({ theme, isSubtitled }) {
-  const stylesOnEveryH1 = "text-center font-italiana text-8xl";
+function TitleLockup({ theme, isSubtitled, isSmall }) {
+  const stylesOnEveryH1 = "text-center font-italiana";
   const stylesOnEveryP = "text-center text-2xl";
 
   let colorThemeStyles;
@@ -22,7 +22,15 @@ function TitleLockup({ theme, isSubtitled }) {
     colorThemeStyles = "text-black";
   }
 
-  const finalH1Styles = classNames(stylesOnEveryH1, colorThemeStyles);
+  let h1Size;
+
+  if (isSmall) {
+    h1Size = "text-7xl";
+  } else {
+    h1Size = "text-8xl";
+  }
+
+  const finalH1Styles = classNames(stylesOnEveryH1, colorThemeStyles, h1Size);
   const finalPStyles = classNames(stylesOnEveryP, colorThemeStyles);
 
   return (
