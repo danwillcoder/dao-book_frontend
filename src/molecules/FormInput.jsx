@@ -1,7 +1,7 @@
 /**
  @typedef formInputProps
  @type {Object}
- @property {'text' | 'number'} type 
+ @property {'text' | 'number' | 'email' | 'password'} type 
  @property {string} inputValue
  @property {React.Dispatch<SetStateAction<string>>} setInputValue
  @property {string} labelText 
@@ -37,7 +37,7 @@ function FormInput({
         placeholder={placeholderText}
         autoComplete={doesAutocomplete}
         required={isRequired}
-        className="rounded-2xl border-2 border-[#DFDFDF] p-2 px-4 text-xl placeholder:text-[#DFDFDF]"
+        className="w-full rounded-2xl border-2 border-[#DFDFDF] p-2 px-4 text-xl placeholder:text-[#DFDFDF]"
       ></input>
     </div>
   );
