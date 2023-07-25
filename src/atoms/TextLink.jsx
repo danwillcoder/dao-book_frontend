@@ -3,9 +3,14 @@ import { Link } from "react-router-dom";
 function TextLink({ paragraphText, linkText, linkDestination }) {
   return (
     <p>
-      {paragraphText && paragraphText}
+      {paragraphText && paragraphText}{" "}
       {linkText && linkDestination && (
-        <Link to={linkDestination}>{linkText}</Link>
+        <Link
+          to={linkDestination}
+          className="underline-offset-3 font-bold text-daobook-amber underline"
+        >
+          {linkText}
+        </Link>
       )}
     </p>
   );
