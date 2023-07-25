@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
 
-function TextLink({ paragraphText, linkText, linkDestination }) {
+function TextLink({ paragraphText, linkText, linkDestination, className }) {
   return (
-    <p>
+    <p className={className}>
       {paragraphText && paragraphText}{" "}
       {linkText && linkDestination && (
         <Link

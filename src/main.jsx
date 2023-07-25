@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import App from "./App.jsx";
 import "./index.css";
 import KitchenSink from "./pages/KitchenSink.jsx";
+import Login from "./pages/Login.jsx";
 import PageLayout from "./pages/PageLayout.jsx";
 import Register from "./pages/Register.jsx";
 
@@ -21,6 +22,10 @@ ReactDOM.createRoot(document.getElementById("root")).render(
           <Route
             path="/register"
             element={<Register />}
+          />
+          <Route
+            path="/login"
+            element={<Login />}
           />
           <Route
             path="/"
