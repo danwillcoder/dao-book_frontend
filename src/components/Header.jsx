@@ -7,7 +7,7 @@ function Header() {
   const navigate = useNavigate();
   //TODO: Fix logout button when login added
   const isLoggedIn = true;
-  const dashboardRoute = "/dashboard";
+  const dashboardRoute = "/";
 
   const isNotOnDashboard = location.pathname !== dashboardRoute;
 
