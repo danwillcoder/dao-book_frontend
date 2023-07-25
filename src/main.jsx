@@ -5,6 +5,7 @@ import App from "./App.jsx";
 import "./index.css";
 import KitchenSink from "./pages/KitchenSink.jsx";
 import PageLayout from "./pages/PageLayout.jsx";
+import Register from "./pages/Register.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
@@ -12,9 +13,19 @@ ReactDOM.createRoot(document.getElementById("root")).render(
       <Routes>
         <Route element={<PageLayout />}>
           {process.env.NODE_ENV === "development" && (
-            <Route path="/kitchen-sink" element={<KitchenSink />} />
+            <Route
+              path="/kitchen-sink"
+              element={<KitchenSink />}
+            />
           )}
-          <Route path="/" element={<App />} />
+          <Route
+            path="/register"
+            element={<Register />}
+          />
+          <Route
+            path="/"
+            element={<App />}
+          />
         </Route>
       </Routes>
     </BrowserRouter>

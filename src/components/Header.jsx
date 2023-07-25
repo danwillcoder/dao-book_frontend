@@ -11,6 +11,10 @@ function Header() {
 
   const isNotOnDashboard = location.pathname !== dashboardRoute;
 
+  if (location.pathname === "/register") {
+    return <></>;
+  }
+
   return (
     <header className="flex place-content-between items-center bg-daobook-amber p-6">
       <TitleLockup
@@ -28,15 +32,24 @@ function Header() {
             }}
           ></Button>
         )}
-        {isLoggedIn && (
+        {isLoggedIn ? (
           <Button
             theme="light"
             buttonText="Logout"
             onClick={() => {
-              // logout here
+              //TODO logout here
               console.log("Logged out");
             }}
           ></Button>
+        ) : (
+          <Button
+            theme="light"
+            buttonText="Patient Login"
+            onClick={() => {
+              //TODO nav to patient dash
+              console.log("Nav to patient dash");
+            }}
+          />
         )}
       </div>
     </header>

@@ -1,8 +1,7 @@
 /**
  @typedef formInputProps
  @type {Object}
- @property {'text' | 'number'} type 
- @property {string} inputValue
+ @property {'text' | 'number' | 'email' | 'password'} type 
  @property {React.Dispatch<SetStateAction<string>>} setInputValue
  @property {string} labelText 
  @property {string} placeholderText 
@@ -15,15 +14,13 @@
  */
 function FormInput({
   type,
-  inputValue,
-  setInputValue,
+  name,
+  onChange,
   labelText,
   placeholderText,
   doesAutocomplete,
   isRequired,
 }) {
-  const handleChange = (e) => setInputValue(e.target.value);
-
   return (
     <div>
       <label className="block pb-2 text-xl">
@@ -32,12 +29,12 @@ function FormInput({
       </label>
       <input
         type={type}
-        value={inputValue}
-        onChange={handleChange}
+        name={name}
+        onChange={onChange}
         placeholder={placeholderText}
         autoComplete={doesAutocomplete}
         required={isRequired}
-        className="rounded-2xl border-2 border-[#DFDFDF] p-2 px-4 text-xl placeholder:text-[#DFDFDF]"
+        className="w-full rounded-2xl border-2 border-[#DFDFDF] p-2 px-4 text-xl placeholder:text-[#DFDFDF]"
       ></input>
     </div>
   );

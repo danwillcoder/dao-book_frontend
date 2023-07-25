@@ -13,7 +13,7 @@ import propTypes from "prop-types";
  * @param {titleProps} props
  */
 function TitleLockup({ theme, isSubtitled, isSmall }) {
-  const stylesOnEveryH1 = "text-center font-italiana";
+  const stylesOnEveryHeading = "text-center font-italiana";
   const stylesOnEveryP = "text-center text-2xl";
 
   let colorThemeStyles;
@@ -24,20 +24,24 @@ function TitleLockup({ theme, isSubtitled, isSmall }) {
     colorThemeStyles = "text-black";
   }
 
-  let h1Size;
+  let headingSize;
 
   if (isSmall) {
-    h1Size = "text-7xl";
+    headingSize = "text-7xl";
   } else {
-    h1Size = "text-8xl";
+    headingSize = "text-8xl";
   }
 
-  const finalH1Styles = classNames(stylesOnEveryH1, colorThemeStyles, h1Size);
+  const finalH1Styles = classNames(
+    stylesOnEveryHeading,
+    colorThemeStyles,
+    headingSize
+  );
   const finalPStyles = classNames(stylesOnEveryP, colorThemeStyles);
 
   return (
     <div>
-      <h1 className={finalH1Styles}>Dao Book</h1>
+      <p className={finalH1Styles}>Dao Book</p>
       {isSubtitled && <p className={finalPStyles}>The way of clinic notes</p>}
     </div>
   );
