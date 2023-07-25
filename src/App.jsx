@@ -12,6 +12,7 @@ export default function App() {
         {userName ? `Dr. ${userName}.` : "Doctor."}{" "}
       </h1>
       <div className="flex gap-7">
+        {/* TODO add the page navigation */}
         <DashboardButton buttonText="Initial Consult" />
         <DashboardButton buttonText="Return Consult" />
         <DashboardButton buttonText="Patient List" />
