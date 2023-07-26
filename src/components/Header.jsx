@@ -11,7 +11,7 @@ function Header() {
 
   const isNotOnDashboard = location.pathname !== dashboardRoute;
 
-  if (location.pathname === "/register") {
+  if (location.pathname === "/register" || location.pathname === "/login") {
     return <></>;
   }
 
