@@ -2,7 +2,6 @@ import { useState } from "react";
 import Button from "../atoms/Button";
 import FormInput from "../molecules/FormInput";
 import TextLink from "../atoms/TextLink";
-import { Form } from "react-router-dom";
 
 function InitialConsult() {
   const [formData, setFormData] = useState({
@@ -27,6 +26,8 @@ function InitialConsult() {
 
   const [isSaved, setHasSaved] = useState();
 
+  // TODO: submit to backend and update state accordingly (setHasSaved)
+  // Does this also become live data they can update & resubmit?
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(JSON.stringify(formData));
