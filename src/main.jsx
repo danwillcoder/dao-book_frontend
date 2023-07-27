@@ -3,11 +3,11 @@ import ReactDOM from "react-dom/client";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import App from "./App.jsx";
 import "./index.css";
+import InitialConsult from "./pages/InitialConsult.jsx";
 import KitchenSink from "./pages/KitchenSink.jsx";
 import Login from "./pages/Login.jsx";
 import PageLayout from "./pages/PageLayout.jsx";
 import Register from "./pages/Register.jsx";
-import InitialConsult from "./pages/InitialConsult.jsx";
 import ReturnConsult from "./pages/ReturnConsult.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
