@@ -2,7 +2,7 @@ import Button from "../atoms/Button";
 import DashboardButton from "../atoms/DashboardButton";
 import SectionHeading from "../atoms/SectionHeading";
 import TitleLockup from "../atoms/TitleLockup";
-import FormInput from "../molecules/FormInput";
+import MemoFormInput from "../molecules/FormInput";
 
 function KitchenSink() {
   return (
@@ -62,12 +62,12 @@ function KitchenSink() {
         <DashboardButton buttonText="Patient List" />
       </div>
       <div className="bg-slate-100 p-5">
-        <FormInput
+        <MemoFormInput
           labelText="Email"
           placeholderText="address@example.com"
           isRequired={true}
         />
-        <FormInput
+        <MemoFormInput
           labelText="Password"
           placeholderText="*****"
         />

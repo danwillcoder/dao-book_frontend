@@ -1,7 +1,7 @@
 import Button from "../atoms/Button";
 import TextLink from "../atoms/TextLink";
 import TitleLockup from "../atoms/TitleLockup";
-import FormInput from "../molecules/FormInput";
+import MemoFormInput from "../molecules/FormInput";
 import { useState } from "react";
 
 function Login() {
@@ -39,22 +39,22 @@ function Login() {
           className="px-15 flex max-w-2xl flex-col gap-4"
           onSubmit={handleSubmit}
         >
-          <FormInput
+          <MemoFormInput
             type="email"
             name="email"
             labelText="Email"
             placeholderText="susan@example.com"
             isRequired={true}
             onChange={handleChange}
-          ></FormInput>
-          <FormInput
+          ></MemoFormInput>
+          <MemoFormInput
             type="password"
             name="password"
             labelText="Password"
             placeholderText="*****"
             isRequired={true}
             onChange={handleChange}
-          ></FormInput>
+          ></MemoFormInput>
           <Button
             theme="light"
             isFullWidth={true}

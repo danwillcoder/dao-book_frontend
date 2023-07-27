@@ -1,6 +1,6 @@
 import Button from "../atoms/Button";
 import TitleLockup from "../atoms/TitleLockup";
-import FormInput from "../molecules/FormInput";
+import MemoFormInput from "../molecules/FormInput";
 import { useState } from "react";
 
 function Register() {
@@ -40,46 +40,46 @@ function Register() {
           className="px-15 flex max-w-2xl flex-col gap-4"
           onSubmit={handleSubmit}
         >
-          <FormInput
+          <MemoFormInput
             type="text"
             name="firstName"
             labelText="First Name"
             placeholderText="Susan"
             isRequired={true}
             onChange={handleChange}
-          ></FormInput>
-          <FormInput
+          ></MemoFormInput>
+          <MemoFormInput
             type="text"
             name="lastName"
             labelText="Last Name"
             placeholderText="Reynolds"
             isRequired={true}
             onChange={handleChange}
-          ></FormInput>
-          <FormInput
+          ></MemoFormInput>
+          <MemoFormInput
             type="email"
             name="email"
             labelText="Email"
             placeholderText="susan@example.com"
             isRequired={true}
             onChange={handleChange}
-          ></FormInput>
-          <FormInput
+          ></MemoFormInput>
+          <MemoFormInput
             type="number"
             name="AHPRA"
             labelText="AHPRA no."
             placeholderText="1336"
             isRequired={true}
             onChange={handleChange}
-          ></FormInput>
-          <FormInput
+          ></MemoFormInput>
+          <MemoFormInput
             type="password"
             name="password"
             labelText="Password"
             placeholderText="*****"
             isRequired={true}
             onChange={handleChange}
-          ></FormInput>
+          ></MemoFormInput>
           <Button
             theme="light"
             isFullWidth={true}

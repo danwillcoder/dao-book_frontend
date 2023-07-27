@@ -1,3 +1,4 @@
+import React from "react";
 /**
  @typedef formInputProps
  @type {Object}
@@ -85,4 +86,8 @@ function FormInput({
   );
 }
 
+const MemoFormInput = React.memo(FormInput);
+
 export default FormInput;
+
+export { MemoFormInput };
