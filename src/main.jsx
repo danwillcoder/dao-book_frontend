@@ -7,6 +7,8 @@ import KitchenSink from "./pages/KitchenSink.jsx";
 import Login from "./pages/Login.jsx";
 import PageLayout from "./pages/PageLayout.jsx";
 import Register from "./pages/Register.jsx";
+import InitialConsult from "./pages/InitialConsult.jsx";
+import ReturnConsult from "./pages/ReturnConsult.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
@@ -31,6 +33,14 @@ ReactDOM.createRoot(document.getElementById("root")).render(
           <Route
             path="/"
             element={<App />}
+          />
+          <Route
+            path="/initial-consult"
+            element={<InitialConsult />}
+          />
+          <Route
+            path="/return-consult"
+            element={<ReturnConsult />}
           />
         </Route>
       </Routes>
