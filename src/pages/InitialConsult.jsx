@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Button from "../atoms/Button";
-import FormInput from "../molecules/FormInput";
+import MemoFormInput from "../molecules/FormInput";
 import TextLink from "../atoms/TextLink";
 
 function InitialConsult() {
@@ -55,123 +55,123 @@ function InitialConsult() {
           onSubmit={handleSubmit}
         >
           <h1 className="w-[700px] text-4xl">Patient Profile</h1>
-          <FormInput
+          <MemoFormInput
             type="text"
             name="firstName"
             labelText="First Name"
             placeholderText="Susan"
             isRequired={true}
             onChange={handleChange}
-          ></FormInput>
-          <FormInput
+          ></MemoFormInput>
+          <MemoFormInput
             type="text"
             name="lastName"
             labelText="Last Name"
             placeholderText="Reynolds"
             isRequired={true}
             onChange={handleChange}
-          ></FormInput>
-          <FormInput
+          ></MemoFormInput>
+          <MemoFormInput
             type="email"
             name="email"
             labelText="Email"
             placeholderText="susan@example.com"
             isRequired={true}
             onChange={handleChange}
-          ></FormInput>
-          <FormInput
+          ></MemoFormInput>
+          <MemoFormInput
             type="date"
             name="dateOfBirth"
             labelText="Date of Birth"
             isRequired={true}
             onChange={handleChange}
             defaultValue={defaultDOBValue}
-          ></FormInput>
-          <FormInput
+          ></MemoFormInput>
+          <MemoFormInput
             type="text"
             name="phone"
             labelText="Phone Number"
             placeholderText="0401 234 567"
             onChange={handleChange}
-          ></FormInput>
-          <FormInput
+          ></MemoFormInput>
+          <MemoFormInput
             type="textArea"
             name="medications"
             labelText="Medications"
             placeholderText=""
             onChange={handleChange}
-          ></FormInput>
-          <FormInput
+          ></MemoFormInput>
+          <MemoFormInput
             type="textArea"
             name="history"
             labelText="Health history"
             placeholderText=""
             onChange={handleChange}
-          ></FormInput>
+          ></MemoFormInput>
           <hr className="my-20" />
-          <FormInput
+          <MemoFormInput
             type="date"
             name="sessionDate"
             labelText="Session date"
             onChange={handleChange}
             defaultValue={todayDateNoTime}
-          ></FormInput>
-          <FormInput
+          ></MemoFormInput>
+          <MemoFormInput
             type="text"
             name="complaint"
             labelText="Main complaint"
             onChange={handleChange}
-          ></FormInput>
-          <FormInput
+          ></MemoFormInput>
+          <MemoFormInput
             type="textArea"
             name="sessionNotes"
             labelText="Session notes"
             onChange={handleChange}
-          ></FormInput>
-          <FormInput
+          ></MemoFormInput>
+          <MemoFormInput
             type="textArea"
             name="tongueNotes"
             labelText="Tongue"
             onChange={handleChange}
-          ></FormInput>
-          <FormInput
+          ></MemoFormInput>
+          <MemoFormInput
             type="textArea"
             name="pulseNotes"
             labelText="Pulse"
             onChange={handleChange}
-          ></FormInput>
+          ></MemoFormInput>
           <hr className="my-10" />
           <h2 className="w-[700px] text-3xl">Prescription</h2>
-          <FormInput
+          <MemoFormInput
             type="text"
             name="formulaName"
             labelText="Formula name"
             onChange={handleChange}
-          ></FormInput>
-          <FormInput
+          ></MemoFormInput>
+          <MemoFormInput
             type="textArea"
             name="formulaComposition"
             labelText="Composition"
             onChange={handleChange}
-          ></FormInput>
-          <FormInput
+          ></MemoFormInput>
+          <MemoFormInput
             type="textArea"
             name="formulaDosage"
             labelText="Dosage & administration"
             onChange={handleChange}
-          ></FormInput>
-          <FormInput
+          ></MemoFormInput>
+          <MemoFormInput
             type="textArea"
             name="lifestyleNotes"
             labelText="Lifestyle notes"
             onChange={handleChange}
-          ></FormInput>
-          <FormInput
+          ></MemoFormInput>
+          <MemoFormInput
             type="checkbox"
             name="sendEmail"
             labelText="Email prescription & lifestyle notes"
             onChange={handleChange}
-          ></FormInput>
+          ></MemoFormInput>
           {!isSaved && (
             <Button
               theme="light"
