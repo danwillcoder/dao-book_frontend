@@ -5,6 +5,7 @@ import MemoFormInput from "../molecules/FormInput";
 
 function ConsultForm({ handleSubmit, handleChange, isInitialConsult }) {
   const [isSaved, setHasSaved] = useState();
+  const [editMode, setEditMode] = useState(false);
   const defaultDOBValue = "1990-01-01";
   const todayDateNoTime = new Date().toISOString().split("T")[0];
   const actionButtonText = isInitialConsult ? "Save" : "Edit";
