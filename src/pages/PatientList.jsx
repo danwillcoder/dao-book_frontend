@@ -30,7 +30,7 @@ function PatientList() {
               key={patient.id}
             >
               <Link
-                to={`patient-list/${patient.id}`}
+                to={`/patient-list/${patient.id}`}
                 className="block w-full rounded-2xl border-4 border-[#E3E3E3] bg-white px-2 py-6 text-center font-sans font-semibold text-black shadow-md transition-colors transition-transform hover:scale-105 hover:bg-black/5 focus:ring dark:bg-black/50 dark:text-white dark:hover:bg-black/70"
               >
                 {patient.firstName} {patient.lastName}

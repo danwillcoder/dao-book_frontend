@@ -7,6 +7,7 @@ import InitialConsult from "./pages/InitialConsult.jsx";
 import KitchenSink from "./pages/KitchenSink.jsx";
 import Login from "./pages/Login.jsx";
 import PageLayout from "./pages/PageLayout.jsx";
+import PatientDetails from "./pages/PatientDetails.jsx";
 import PatientList from "./pages/PatientList.jsx";
 import Register from "./pages/Register.jsx";
 import ReturnConsult from "./pages/ReturnConsult.jsx";
@@ -46,6 +47,10 @@ ReactDOM.createRoot(document.getElementById("root")).render(
           <Route
             path="/patient-list"
             element={<PatientList />}
+          />
+          <Route
+            path="/patient-list/:patientId"
+            element={<PatientDetails />}
           />
         </Route>
       </Routes>
