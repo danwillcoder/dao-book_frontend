@@ -56,8 +56,8 @@ function PatientDetails() {
                 buttonText={actionButtonText}
               ></Button>
               <TextLink
-                linkText={"Return to Dashboard"}
-                linkDestination={"/"}
+                linkText={"Back to patient list"}
+                linkDestination={"/patient-list"}
                 className={"my-10 text-center"}
               ></TextLink>
             </>
