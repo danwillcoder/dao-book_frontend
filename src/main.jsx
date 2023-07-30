@@ -13,6 +13,7 @@ import Register from "./pages/Register.jsx";
 import ReturnConsult from "./pages/ReturnConsult.jsx";
 import { AuthProvider } from "./contexts/AuthProvider.jsx";
 import ProtectedPages from "./pages/ProtectedPages.jsx";
+import InitialConsult from "./pages/InitialConsult.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
@@ -42,6 +43,10 @@ ReactDOM.createRoot(document.getElementById("root")).render(
               <Route
                 path="/initial-consult"
                 element={<InitialConsultPatient />}
+              />
+              <Route
+                path="/initial-session"
+                element={<InitialConsult />}
               />
               <Route
                 path="/return-consult"
