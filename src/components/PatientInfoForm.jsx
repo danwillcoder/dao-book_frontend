@@ -11,6 +11,7 @@ function PatientInfoSubform({ handleChange, formData }) {
         placeholderText="Susan"
         isRequired={true}
         onChange={handleChange}
+        defaultValue={formData["firstName"]}
       ></MemoFormInput>
       <MemoFormInput
         type="text"
@@ -19,6 +20,7 @@ function PatientInfoSubform({ handleChange, formData }) {
         placeholderText="Reynolds"
         isRequired={true}
         onChange={handleChange}
+        defaultValue={formData["lastName"]}
       ></MemoFormInput>
       <MemoFormInput
         type="email"
@@ -27,6 +29,7 @@ function PatientInfoSubform({ handleChange, formData }) {
         placeholderText="susan@example.com"
         isRequired={true}
         onChange={handleChange}
+        defaultValue={formData["email"]}
       ></MemoFormInput>
       <MemoFormInput
         type="date"
@@ -34,7 +37,7 @@ function PatientInfoSubform({ handleChange, formData }) {
         labelText="Date of Birth"
         isRequired={true}
         onChange={handleChange}
-        defaultValue={defaultDOBValue}
+        defaultValue={formData["dateOfBirth"] || defaultDOBValue}
       ></MemoFormInput>
       <MemoFormInput
         type="text"
@@ -42,6 +45,7 @@ function PatientInfoSubform({ handleChange, formData }) {
         labelText="Phone Number"
         placeholderText="0401 234 567"
         onChange={handleChange}
+        defaultValue={formData["phone"]}
       ></MemoFormInput>
       <MemoFormInput
         type="textArea"
@@ -49,6 +53,7 @@ function PatientInfoSubform({ handleChange, formData }) {
         labelText="Medications"
         placeholderText=""
         onChange={handleChange}
+        defaultValue={formData["medications"]}
       ></MemoFormInput>
       <MemoFormInput
         type="textArea"
@@ -56,6 +61,7 @@ function PatientInfoSubform({ handleChange, formData }) {
         labelText="Health history"
         placeholderText=""
         onChange={handleChange}
+        defaultValue={formData["history"]}
       ></MemoFormInput>
     </>
   );
