@@ -1,8 +1,12 @@
+import { useState } from "react";
+import { Navigate, useNavigate } from "react-router-dom";
+import { axiosInstance, pracRoutes } from "../api/routes";
 import Button from "../atoms/Button";
 import TextLink from "../atoms/TextLink";
 import TitleLockup from "../atoms/TitleLockup";
+import useAuth from "../hooks/useAuth";
 import MemoFormInput from "../molecules/FormInput";
-import { useState } from "react";
+import { parseJwt } from "../utils.js";
 
 function Login() {
   const [formData, setFormData] = useState({
@@ -10,9 +14,26 @@ function Login() {
     password: "",
   });
 
-  const handleSubmit = (e) => {
+  const [error, setError] = useState();
+  const { auth, setAuth } = useAuth();
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e) => {
+    setError(null);
     e.preventDefault();
-    console.log(JSON.stringify(formData));
+
+    try {
+      const res = await axiosInstance.post(pracRoutes.login, formData);
+      const decodedToken = parseJwt(res.data.token);
+      setAuth(decodedToken);
+      localStorage.setItem("auth", JSON.stringify(decodedToken));
+      navigate("/");
+    } catch (error) {
+      setError({
+        status: error.response.status,
+        message: error.response.data.message,
+      });
+    }
   };
 
   const handleChange = (e) => {
@@ -25,50 +46,63 @@ function Login() {
   };
 
   return (
-    <div className="grid h-screen grid-cols-2">
-      <div className="flex items-center justify-center bg-daobook-amber p-10">
-        <TitleLockup
-          isSubtitled={true}
-          theme="light"
-        />
-      </div>
-      <div className="flex flex-col flex-wrap content-evenly justify-center gap-4">
-        <h1 className="text-6xl">Login</h1>
-        <p className="text-2xl">Welcome back to clinic.</p>
-        <form
-          className="px-15 flex max-w-2xl flex-col gap-4"
-          onSubmit={handleSubmit}
-        >
-          <MemoFormInput
-            type="email"
-            name="email"
-            labelText="Email"
-            placeholderText="susan@example.com"
-            isRequired={true}
-            onChange={handleChange}
-          ></MemoFormInput>
-          <MemoFormInput
-            type="password"
-            name="password"
-            labelText="Password"
-            placeholderText="*****"
-            isRequired={true}
-            onChange={handleChange}
-          ></MemoFormInput>
-          <Button
-            theme="light"
-            isFullWidth={true}
-            buttonText="Login"
-          ></Button>
-        </form>
-        <TextLink
-          linkText="Sign up here"
-          linkDestination={"/register"}
-          paragraphText="TCM Practitioner?"
-          className="mt-40"
-        />
-      </div>
-    </div>
+    <>
+      {auth ? (
+        <Navigate to="/" />
+      ) : (
+        <div className="grid h-screen grid-cols-2">
+          <div className="flex items-center justify-center bg-daobook-amber p-10">
+            <TitleLockup
+              isSubtitled={true}
+              theme="light"
+            />
+          </div>
+          <div className="flex flex-col flex-wrap content-evenly justify-center gap-4">
+            <h1 className="text-6xl">Login</h1>
+            <p className="text-2xl">Welcome back to clinic.</p>
+            <form
+              className="px-15 flex max-w-2xl flex-col gap-4"
+              onSubmit={handleSubmit}
+            >
+              <MemoFormInput
+                type="email"
+                name="email"
+                labelText="Email"
+                placeholderText="susan@example.com"
+                isRequired={true}
+                onChange={handleChange}
+              ></MemoFormInput>
+              <MemoFormInput
+                type="password"
+                name="password"
+                labelText="Password"
+                placeholderText="*****"
+                isRequired={true}
+                onChange={handleChange}
+              ></MemoFormInput>
+              <Button
+                theme="light"
+                isFullWidth={true}
+                buttonText="Login"
+              ></Button>
+              {error && (
+                <>
+                  <p className="font-bold">
+                    Something went wrong, please try again.
+                  </p>
+                </>
+              )}
+            </form>
+            <TextLink
+              linkText="Sign up here"
+              linkDestination={"/register"}
+              paragraphText="TCM Practitioner?"
+              className="mt-40"
+            />
+          </div>
+        </div>
+      )}
+    </>
   );
 }
 

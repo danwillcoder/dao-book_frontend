@@ -3,6 +3,7 @@ const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 const pracRoutes = {
   register: "/prac",
+  login: "/prac/login",
 };
 
 const axiosInstance = axios.create({
