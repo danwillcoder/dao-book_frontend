@@ -22,7 +22,7 @@ function Register() {
     e.preventDefault();
 
     try {
-      const res = await axiosInstance.post(pracRoutes.register, formData);
+      await axiosInstance.post(pracRoutes.register, formData);
       setIsSuccessLoading(true);
       setTimeout(() => {
         setIsSuccessLoading(false);
