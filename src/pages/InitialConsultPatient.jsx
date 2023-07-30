@@ -29,7 +29,7 @@ function InitialConsultPatient() {
       });
       // useLocation() hook to get this data in the next page
       setError("");
-      navigate("initial-session", {
+      navigate("/initial-session", {
         state: { patientId: res.data.patient._id },
       });
     } catch (error) {

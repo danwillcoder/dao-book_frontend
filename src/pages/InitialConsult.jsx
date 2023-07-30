@@ -1,5 +1,7 @@
 import { useState } from "react";
+import { useLocation } from "react-router-dom";
 import ConsultForm from "../components/ConsultForm";
+import { Navigate } from "react-router-dom";
 
 function InitialConsult() {
   const [formData, setFormData] = useState({
@@ -14,6 +16,9 @@ function InitialConsult() {
     lifestyleNotes: "",
     sendEmail: false,
   });
+
+  const locationState = useLocation().state;
+  console.log(locationState);
 
   // TODO: submit to backend and update state accordingly (setHasSaved)
   // Does this also become live data they can update & resubmit?
@@ -31,6 +36,11 @@ function InitialConsult() {
       [name]: value,
     }));
   };
+
+  // Can only reach page from initial-patient page
+  if (!locationState) {
+    return <Navigate to="/" />;
+  }
 
   return (
     <div className="flex flex-col">
