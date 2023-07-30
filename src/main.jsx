@@ -12,6 +12,7 @@ import PatientList from "./pages/PatientList.jsx";
 import Register from "./pages/Register.jsx";
 import ReturnConsult from "./pages/ReturnConsult.jsx";
 import { AuthProvider } from "./contexts/AuthProvider.jsx";
+import ProtectedPages from "./pages/ProtectedPages.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
@@ -34,7 +35,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
               element={<Login />}
             />
             {/* TODO Put this in a protected route */}
-            <Route>
+            <Route element={<ProtectedPages />}>
               <Route
                 path="/"
                 element={<App />}
