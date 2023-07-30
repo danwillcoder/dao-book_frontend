@@ -1,16 +1,18 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import Button from "../atoms/Button";
 import TitleLockup from "../atoms/TitleLockup";
+import useAuth from "../hooks/useAuth";
 
 function Header() {
   const location = useLocation();
   const navigate = useNavigate();
-  //TODO: Fix logout button when login added
-  const isLoggedIn = true;
+  const { setAuth } = useAuth();
   const dashboardRoute = "/";
 
+  // Only show dashboard button when not on dashboard
   const isNotOnDashboard = location.pathname !== dashboardRoute;
 
+  // No header on these pages
   if (location.pathname === "/register" || location.pathname === "/login") {
     return <></>;
   }
@@ -32,25 +34,14 @@ function Header() {
             }}
           ></Button>
         )}
-        {isLoggedIn ? (
-          <Button
-            theme="light"
-            buttonText="Logout"
-            onClick={() => {
-              //TODO logout here
-              console.log("Logged out");
-            }}
-          ></Button>
-        ) : (
-          <Button
-            theme="light"
-            buttonText="Patient Login"
-            onClick={() => {
-              //TODO nav to patient dash
-              console.log("Nav to patient dash");
-            }}
-          />
-        )}
+        <Button
+          theme="light"
+          buttonText="Logout"
+          onClick={() => {
+            localStorage.removeItem("auth");
+            setAuth({});
+          }}
+        ></Button>
       </div>
     </header>
   );

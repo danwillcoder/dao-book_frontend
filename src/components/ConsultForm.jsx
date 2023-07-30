@@ -2,13 +2,20 @@ import { useState } from "react";
 import Button from "../atoms/Button";
 import TextLink from "../atoms/TextLink";
 import MemoFormInput from "../molecules/FormInput";
+import PatientInfoSubform from "./PatientInfoForm";
 
-function ConsultForm({ handleSubmit, handleChange, isInitialConsult }) {
+function ConsultForm({
+  handleSubmit,
+  handleChange,
+  isInitialConsult,
+  formData,
+}) {
   const [isSaved, setHasSaved] = useState();
   const [editMode, setEditMode] = useState(false);
-  const defaultDOBValue = "1990-01-01";
   const todayDateNoTime = new Date().toISOString().split("T")[0];
   const actionButtonText = isInitialConsult ? "Save" : "Edit";
+
+  //TODO render formData as each input's default value
 
   return (
     <div className="flex flex-col flex-wrap content-center justify-center gap-4">
@@ -16,67 +23,6 @@ function ConsultForm({ handleSubmit, handleChange, isInitialConsult }) {
         className="px-15 flex max-w-2xl flex-col gap-4"
         onSubmit={handleSubmit}
       >
-        {isInitialConsult ? (
-          <>
-            <h1 className="w-[700px] text-4xl">Patient Profile</h1>
-            <MemoFormInput
-              type="text"
-              name="firstName"
-              labelText="First Name"
-              placeholderText="Susan"
-              isRequired={true}
-              onChange={handleChange}
-            ></MemoFormInput>
-            <MemoFormInput
-              type="text"
-              name="lastName"
-              labelText="Last Name"
-              placeholderText="Reynolds"
-              isRequired={true}
-              onChange={handleChange}
-            ></MemoFormInput>
-            <MemoFormInput
-              type="email"
-              name="email"
-              labelText="Email"
-              placeholderText="susan@example.com"
-              isRequired={true}
-              onChange={handleChange}
-            ></MemoFormInput>
-            <MemoFormInput
-              type="date"
-              name="dateOfBirth"
-              labelText="Date of Birth"
-              isRequired={true}
-              onChange={handleChange}
-              defaultValue={defaultDOBValue}
-            ></MemoFormInput>
-            <MemoFormInput
-              type="text"
-              name="phone"
-              labelText="Phone Number"
-              placeholderText="0401 234 567"
-              onChange={handleChange}
-            ></MemoFormInput>
-            <MemoFormInput
-              type="textArea"
-              name="medications"
-              labelText="Medications"
-              placeholderText=""
-              onChange={handleChange}
-            ></MemoFormInput>
-            <MemoFormInput
-              type="textArea"
-              name="history"
-              labelText="Health history"
-              placeholderText=""
-              onChange={handleChange}
-            ></MemoFormInput>
-            <hr className="my-20" />
-          </>
-        ) : (
-          <></>
-        )}
         <MemoFormInput
           type="date"
           name="sessionDate"
