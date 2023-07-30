@@ -17,4 +17,4 @@ const axiosInstance = axios.create({
   },
 });
 
-export { axiosInstance, pracRoutes };
+export { axiosInstance, pracRoutes, patientRoutes };
