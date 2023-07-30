@@ -17,7 +17,7 @@ function parseJwt(token) {
 function isJwtExpired(decodedToken) {
   const JwtTimestampInSeconds = decodedToken.exp;
   const timeNowAsEpochSecondTimestamp = Math.trunc(new Date().getTime() / 1000);
-  return timeNowAsEpochSecondTimestamp > JwtTimestampInSeconds;
+  return timeNowAsEpochSecondTimestamp <= JwtTimestampInSeconds;
 }
 
 export { parseJwt, isJwtExpired };
