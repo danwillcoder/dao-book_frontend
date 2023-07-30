@@ -28,6 +28,7 @@ function InitialConsultPatient() {
         headers: { Authorization: `Basic ${token}` },
       });
       // useLocation() hook to get this data in the next page
+      setError("");
       navigate("session", { state: { patientId: res.data.patient._id } });
     } catch (error) {
       setError(error.message);
