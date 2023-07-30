@@ -1,20 +1,39 @@
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { axiosInstance, pracRoutes } from "../api/routes";
 import Button from "../atoms/Button";
+import TextLink from "../atoms/TextLink";
 import TitleLockup from "../atoms/TitleLockup";
 import MemoFormInput from "../molecules/FormInput";
-import { useState } from "react";
 
 function Register() {
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
     email: "",
-    AHPRA: 0,
+    AHPRA: "",
     password: "",
   });
+  const [error, setError] = useState({});
+  const [isSuccessLoading, setIsSuccessLoading] = useState(false);
+  const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(JSON.stringify(formData));
+
+    try {
+      await axiosInstance.post(pracRoutes.register, formData);
+      setIsSuccessLoading(true);
+      setTimeout(() => {
+        setIsSuccessLoading(false);
+        navigate("/login");
+      }, 3000);
+    } catch (error) {
+      setError({
+        status: error.response.status,
+        message: error.response.data.message,
+      });
+    }
   };
 
   const handleChange = (e) => {
@@ -65,7 +84,7 @@ function Register() {
             onChange={handleChange}
           ></MemoFormInput>
           <MemoFormInput
-            type="number"
+            type="text"
             name="AHPRA"
             labelText="AHPRA no."
             placeholderText="1336"
@@ -80,11 +99,29 @@ function Register() {
             isRequired={true}
             onChange={handleChange}
           ></MemoFormInput>
+          {error && (
+            <>
+              <p>{error.message}</p>
+              {error.status === 400 ? (
+                <TextLink
+                  linkDestination="/login"
+                  linkText="Login"
+                />
+              ) : (
+                <></>
+              )}
+            </>
+          )}
           <Button
             theme="light"
             isFullWidth={true}
             buttonText="Register"
           ></Button>
+          {isSuccessLoading && (
+            <p className="z-10 text-center text-xl text-daobook-amber">
+              Registered. Redirecting...
+            </p>
+          )}
         </form>
       </div>
     </div>
