@@ -15,7 +15,7 @@ function Login() {
   });
 
   const [error, setError] = useState();
-  const { auth, setAuth } = useAuth();
+  const { auth, setAuth, setToken } = useAuth();
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -24,9 +24,12 @@ function Login() {
 
     try {
       const res = await axiosInstance.post(pracRoutes.login, formData);
-      const decodedToken = parseJwt(res.data.token);
+      const token = res.data.token;
+      const decodedToken = parseJwt(token);
+      setToken(token);
       setAuth(decodedToken);
       localStorage.setItem("auth", JSON.stringify(decodedToken));
+      localStorage.setItem("authToken", JSON.stringify(res.data.token));
       navigate("/");
     } catch (error) {
       setError({

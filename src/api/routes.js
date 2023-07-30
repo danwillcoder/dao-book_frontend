@@ -6,6 +6,10 @@ const pracRoutes = {
   login: "/prac/login",
 };
 
+const patientRoutes = {
+  create: "/patient",
+};
+
 const axiosInstance = axios.create({
   baseURL: BASE_URL,
   headers: {
