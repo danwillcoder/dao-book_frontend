@@ -34,7 +34,6 @@ ReactDOM.createRoot(document.getElementById("root")).render(
               path="/login"
               element={<Login />}
             />
-            {/* TODO Put this in a protected route */}
             <Route element={<ProtectedPages />}>
               <Route
                 path="/"

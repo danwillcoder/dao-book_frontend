@@ -7,8 +7,6 @@ function Header() {
   const location = useLocation();
   const navigate = useNavigate();
   const { setAuth } = useAuth();
-  //TODO: Fix logout button when login added
-  const isLoggedIn = true;
   const dashboardRoute = "/";
 
   // Only show dashboard button when not on dashboard
@@ -36,26 +34,14 @@ function Header() {
             }}
           ></Button>
         )}
-        {isLoggedIn ? (
-          <Button
-            theme="light"
-            buttonText="Logout"
-            onClick={() => {
-              //TODO logout here
-              localStorage.removeItem("auth");
-              setAuth({});
-            }}
-          ></Button>
-        ) : (
-          <Button
-            theme="light"
-            buttonText="Patient Login"
-            onClick={() => {
-              //TODO nav to patient dash
-              console.log("Nav to patient dash");
-            }}
-          />
-        )}
+        <Button
+          theme="light"
+          buttonText="Logout"
+          onClick={() => {
+            localStorage.removeItem("auth");
+            setAuth({});
+          }}
+        ></Button>
       </div>
     </header>
   );
