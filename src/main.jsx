@@ -11,49 +11,54 @@ import PatientDetails from "./pages/PatientDetails.jsx";
 import PatientList from "./pages/PatientList.jsx";
 import Register from "./pages/Register.jsx";
 import ReturnConsult from "./pages/ReturnConsult.jsx";
+import { AuthProvider } from "./contexts/AuthProvider.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <BrowserRouter>
-      <Routes>
-        <Route element={<PageLayout />}>
-          {process.env.NODE_ENV === "development" && (
+      <AuthProvider>
+        <Routes>
+          <Route element={<PageLayout />}>
+            {process.env.NODE_ENV === "development" && (
+              <Route
+                path="/kitchen-sink"
+                element={<KitchenSink />}
+              />
+            )}
             <Route
-              path="/kitchen-sink"
-              element={<KitchenSink />}
+              path="/register"
+              element={<Register />}
             />
-          )}
-          <Route
-            path="/register"
-            element={<Register />}
-          />
-          <Route
-            path="/login"
-            element={<Login />}
-          />
-          {/* TODO Put this in a protected route */}
-          <Route
-            path="/"
-            element={<App />}
-          />
-          <Route
-            path="/initial-consult"
-            element={<InitialConsult />}
-          />
-          <Route
-            path="/return-consult"
-            element={<ReturnConsult />}
-          />
-          <Route
-            path="/patient-list"
-            element={<PatientList />}
-          />
-          <Route
-            path="/patient-list/:patientId"
-            element={<PatientDetails />}
-          />
-        </Route>
-      </Routes>
+            <Route
+              path="/login"
+              element={<Login />}
+            />
+            {/* TODO Put this in a protected route */}
+            <Route>
+              <Route
+                path="/"
+                element={<App />}
+              />
+              <Route
+                path="/initial-consult"
+                element={<InitialConsult />}
+              />
+              <Route
+                path="/return-consult"
+                element={<ReturnConsult />}
+              />
+              <Route
+                path="/patient-list"
+                element={<PatientList />}
+              />
+              <Route
+                path="/patient-list/:patientId"
+                element={<PatientDetails />}
+              />
+            </Route>
+          </Route>
+        </Routes>
+      </AuthProvider>
     </BrowserRouter>
   </React.StrictMode>
 );
