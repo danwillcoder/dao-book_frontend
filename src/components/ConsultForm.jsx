@@ -2,7 +2,7 @@ import { useState } from "react";
 import Button from "../atoms/Button";
 import TextLink from "../atoms/TextLink";
 import MemoFormInput from "../molecules/FormInput";
-import PatientInfoSubform from "./PatientInfoSubform";
+import PatientInfoSubform from "./PatientInfoForm";
 
 function ConsultForm({
   handleSubmit,
@@ -23,15 +23,6 @@ function ConsultForm({
         className="px-15 flex max-w-2xl flex-col gap-4"
         onSubmit={handleSubmit}
       >
-        {isInitialConsult ? (
-          <>
-            <h1 className="w-[700px] text-4xl">Patient Profile</h1>
-            <PatientInfoSubform handleChange={handleChange} />
-            <hr className="my-20" />
-          </>
-        ) : (
-          <></>
-        )}
         <MemoFormInput
           type="date"
           name="sessionDate"

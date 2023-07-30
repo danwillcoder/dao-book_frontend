@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useParams } from "react-router-dom";
 import Button from "../atoms/Button";
 import TextLink from "../atoms/TextLink";
-import PatientInfoSubform from "../components/PatientInfoSubform";
+import PatientInfoSubform from "../components/PatientInfoForm";
 
 function PatientDetails() {
   let params = useParams();

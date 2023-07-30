@@ -3,13 +3,6 @@ import ConsultForm from "../components/ConsultForm";
 
 function InitialConsult() {
   const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    dateOfBirth: "",
-    phone: "",
-    medications: "",
-    history: "",
     sessionDate: "",
     complaint: "",
     sessionNotes: "",

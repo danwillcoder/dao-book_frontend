@@ -1,8 +1,11 @@
 import { useState } from "react";
+import { axiosInstance, patientRoutes } from "../api/routes";
 import PatientInfoForm from "../components/PatientInfoForm";
-import { axiosInstance, pracRoutes } from "../api/routes";
+import useAuth from "../hooks/useAuth";
 
-function InitialConsult() {
+function InitialConsultPatient() {
+  const { token } = useAuth();
+
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -13,11 +16,20 @@ function InitialConsult() {
     history: "",
   });
 
+  const [error, setError] = useState("");
+
   // TODO: submit to backend and update state accordingly (setHasSaved)
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(JSON.stringify(formData));
-    const res = await axiosInstance.post(patientRoutes.create);
+    try {
+      const res = await axiosInstance.post(patientRoutes.create, formData, {
+        headers: { Authorization: `Basic ${token}` },
+      });
+      console.log(res);
+    } catch (error) {
+      console.log(error);
+      setError(error.message);
+    }
   };
 
   const handleChange = (e) => {
@@ -31,16 +43,17 @@ function InitialConsult() {
   };
 
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col items-center">
       <h1 className="my-20 text-center text-4xl">Initial Consult Form</h1>
-      <h1 className="w-[700px] text-4xl">Patient Profile</h1>
       <PatientInfoForm
+        formData={formData}
         handleChange={handleChange}
         handleSubmit={handleSubmit}
       />
+      {error && <p>{error}</p>}
       <hr className="my-20" />
     </div>
   );
 }
 
-export default InitialConsult;
+export default InitialConsultPatient;
