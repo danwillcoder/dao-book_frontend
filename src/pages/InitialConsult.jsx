@@ -4,8 +4,9 @@ import ConsultForm from "../components/ConsultForm";
 import { Navigate } from "react-router-dom";
 
 function InitialConsult() {
+  const todaysDate = new Date().toISOString().split("T")[0];
   const [formData, setFormData] = useState({
-    sessionDate: "",
+    sessionDate: todaysDate,
     complaint: "",
     sessionNotes: "",
     tongueNotes: "",
@@ -46,6 +47,7 @@ function InitialConsult() {
     <div className="flex flex-col">
       <h1 className="my-20 text-center text-4xl">Initial Consult Form</h1>
       <ConsultForm
+        formData={formData}
         handleChange={handleChange}
         handleSubmit={handleSubmit}
         isInitialConsult={true}
