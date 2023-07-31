@@ -29,7 +29,6 @@ function PatientList() {
       </h1>
       <ul className="flex flex-col items-center gap-7">
         {patients.map((patient) => {
-          console.log(patient);
           return (
             <li
               className="min-w-[600px]"
