@@ -38,7 +38,7 @@ function Header() {
           theme="light"
           buttonText="Logout"
           onClick={() => {
-            localStorage.removeItem("auth");
+            localStorage.clear();
             setAuth({});
             setToken({});
             setPracName({});
