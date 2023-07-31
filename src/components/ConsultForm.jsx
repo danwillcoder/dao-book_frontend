@@ -12,7 +12,6 @@ function ConsultForm({
 }) {
   const [isSaved, setHasSaved] = useState();
   const [editMode, setEditMode] = useState(false);
-  const todayDateNoTime = new Date().toISOString().split("T")[0];
   const actionButtonText = isInitialConsult ? "Save" : "Edit";
 
   //TODO render formData as each input's default value
@@ -28,31 +27,35 @@ function ConsultForm({
           name="sessionDate"
           labelText="Session date"
           onChange={handleChange}
-          defaultValue={todayDateNoTime}
+          defaultValue={formData.sessionDate}
         ></MemoFormInput>
         <MemoFormInput
           type="text"
           name="complaint"
           labelText="Main complaint"
           onChange={handleChange}
+          defaultValue={formData.complaint}
         ></MemoFormInput>
         <MemoFormInput
           type="textArea"
           name="sessionNotes"
           labelText="Session notes"
           onChange={handleChange}
+          defaultValue={formData.sessionNotes}
         ></MemoFormInput>
         <MemoFormInput
           type="textArea"
           name="tongueNotes"
           labelText="Tongue"
           onChange={handleChange}
+          defaultValue={formData.tongueNotes}
         ></MemoFormInput>
         <MemoFormInput
           type="textArea"
           name="pulseNotes"
           labelText="Pulse"
           onChange={handleChange}
+          defaultValue={formData.pulseNotes}
         ></MemoFormInput>
         <hr className="my-10" />
         <h2 className="w-[700px] text-3xl">Prescription</h2>
@@ -61,24 +64,28 @@ function ConsultForm({
           name="formulaName"
           labelText="Formula name"
           onChange={handleChange}
+          defaultValue={formData.formulaName}
         ></MemoFormInput>
         <MemoFormInput
           type="textArea"
           name="formulaComposition"
           labelText="Composition"
           onChange={handleChange}
+          defaultValue={formData.formulaComposition}
         ></MemoFormInput>
         <MemoFormInput
           type="textArea"
           name="formulaDosage"
           labelText="Dosage & administration"
           onChange={handleChange}
+          defaultValue={formData.formulaDosage}
         ></MemoFormInput>
         <MemoFormInput
           type="textArea"
           name="lifestyleNotes"
           labelText="Lifestyle notes"
           onChange={handleChange}
+          defaultValue={formData.lifestyleNotes}
         ></MemoFormInput>
         <MemoFormInput
           type="checkbox"
