@@ -33,11 +33,19 @@ function InitialConsultPatient() {
         state: { patientId: res.data.patient._id },
       });
     } catch (error) {
-      setError(error.message);
+      console.log(error);
+      if (error.response.status === 403) {
+        setError(
+          "A matching patient already exists. Double-check name, email and birthday."
+        );
+      } else {
+        setError(error.message);
+      }
     }
   };
 
   const handleChange = (e) => {
+    setError("");
     const type = e.target.type;
     const name = e.target.name;
     const value = type === "checkbox" ? e.target.checked : e.target.value;
@@ -56,7 +64,7 @@ function InitialConsultPatient() {
         handleSubmit={handleSubmit}
         isInitialConsult={true}
       />
-      {error && <p>{error}</p>}
+      {error && <p className="mt-2">{error}</p>}
       <hr className="my-20" />
     </div>
   );

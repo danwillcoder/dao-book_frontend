@@ -75,7 +75,7 @@ function PatientDetails() {
   return (
     <div className="flex flex-col items-center">
       <h1 className="my-20 text-center text-4xl">Patient Profile</h1>
-      {error && <p>{error}</p>}
+      {error && <p>{error.data.message}</p>}
       {infoLoading ? (
         <p>Loading...</p>
       ) : (
