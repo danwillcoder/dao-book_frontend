@@ -1,23 +1,42 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import Button from "../atoms/Button";
+import { axiosInstance, patientRoutes } from "../api/routes";
 import TextLink from "../atoms/TextLink";
 import PatientInfoSubform from "../components/PatientInfoForm";
+import useAuth from "../hooks/useAuth";
+import { dateTimeToDate } from "../utils";
 
 function PatientDetails() {
+  const { token } = useAuth();
   let params = useParams();
   const patientId = params.patientId;
 
   // Fetch patient info
   const [patientInfo, setPatientInfo] = useState({});
   const [infoLoading, setInfoLoading] = useState(false);
+  const [error, setError] = useState(false);
 
   // Fetch sessions
   const [sessionsData, setSessionsData] = useState([]);
   const [sessionsLoading, setSessionsLoading] = useState(true);
 
-  const [isSaved, setIsSaved] = useState(false);
-  const actionButtonText = isSaved ? "Saved" : "Save";
+  useEffect(() => {
+    const fetchPatientDetails = async () => {
+      try {
+        const res = await axiosInstance(patientRoutes.getOne + patientId, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        const currentData = res.data.patient;
+        // Fix date field to only contain date
+        currentData.dateOfBirth = dateTimeToDate(currentData.dateOfBirth);
+        setPatientInfo(res.data.patient);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchPatientDetails().catch((error) => console.log(error));
+  }, [patientId, token]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -37,6 +56,7 @@ function PatientDetails() {
   return (
     <div className="flex flex-col items-center">
       <h1 className="my-20 text-center text-4xl">Patient Profile</h1>
+      {error && <p>{error}</p>}
       {infoLoading ? (
         <p>Loading...</p>
       ) : (

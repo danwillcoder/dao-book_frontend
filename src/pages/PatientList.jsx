@@ -11,7 +11,7 @@ function PatientList() {
   useEffect(() => {
     const fetchPatients = async () => {
       try {
-        const res = await axiosInstance.get(patientRoutes.get + auth._id, {
+        const res = await axiosInstance.get(patientRoutes.getAll + auth._id, {
           headers: { Authorization: `Basic ${token}` },
         });
         setPatients(res.data.patients);

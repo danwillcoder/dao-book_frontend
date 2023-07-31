@@ -8,7 +8,8 @@ const pracRoutes = {
 };
 
 const patientRoutes = {
-  get: "/patients/prac/",
+  getAll: "/patients/prac/",
+  getOne: "/patient/",
   create: "/patient",
 };
 
