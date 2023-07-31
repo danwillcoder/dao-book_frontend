@@ -6,7 +6,7 @@ import useAuth from "../hooks/useAuth";
 function Header() {
   const location = useLocation();
   const navigate = useNavigate();
-  const { setAuth } = useAuth();
+  const { setAuth, setToken, setPracName } = useAuth();
   const dashboardRoute = "/";
 
   // Only show dashboard button when not on dashboard
@@ -40,6 +40,8 @@ function Header() {
           onClick={() => {
             localStorage.removeItem("auth");
             setAuth({});
+            setToken({});
+            setPracName({});
           }}
         ></Button>
       </div>

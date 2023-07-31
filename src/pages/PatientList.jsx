@@ -5,8 +5,7 @@ import { axiosInstance, patientRoutes } from "../api/routes";
 import useAuth from "../hooks/useAuth";
 
 function PatientList() {
-  const { token, auth } = useAuth();
-  const [userName, setUserName] = useState("");
+  const { token, auth, pracName } = useAuth();
   const [patients, setPatients] = useState([]);
 
   useEffect(() => {
@@ -26,7 +25,7 @@ function PatientList() {
   return (
     <div className="flex flex-col items-center">
       <h1 className="my-20 text-center text-4xl">
-        Patient List for {userName ? `Dr. ${userName}.` : "Doctor."}
+        Patient List for {pracName ? `Dr. ${pracName}.` : "Doctor."}
       </h1>
       <ul className="flex flex-col items-center gap-7">
         {patients.map((patient) => {

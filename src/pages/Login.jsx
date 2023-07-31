@@ -15,7 +15,7 @@ function Login() {
   });
 
   const [error, setError] = useState();
-  const { auth, setAuth, setToken } = useAuth();
+  const { auth, setAuth, setToken, setPracName } = useAuth();
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -23,13 +23,26 @@ function Login() {
     e.preventDefault();
 
     try {
+      // Post form data
       const res = await axiosInstance.post(pracRoutes.login, formData);
+      // Receive JWT and store in both state & localStorage
       const token = res.data.token;
       const decodedToken = parseJwt(token);
       setToken(token);
       setAuth(decodedToken);
       localStorage.setItem("auth", JSON.stringify(decodedToken));
       localStorage.setItem("authToken", JSON.stringify(res.data.token));
+      // Use token to fetch practitioner name
+      const pracNameRes = await axiosInstance.get(
+        pracRoutes.get + decodedToken._id,
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+      const { firstName, lastName } = pracNameRes.data.prac;
+      const fullName = `${firstName} ${lastName}`;
+      setPracName(fullName);
+      localStorage.setItem("pracName", JSON.stringify(fullName));
+
+      // Redirect
       navigate("/");
     } catch (error) {
       setError({

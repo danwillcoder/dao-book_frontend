@@ -1,10 +1,9 @@
 import DashboardButton from "./atoms/DashboardButton";
-import { useState } from "react";
+import useAuth from "./hooks/useAuth";
 import { useNavigate } from "react-router-dom";
 
 export default function App() {
-  //TODO get user's first name from context
-  const [userName, setUserName] = useState("");
+  const { pracName } = useAuth();
   const navigate = useNavigate();
 
   const initialConsultClick = () => {
@@ -23,7 +22,7 @@ export default function App() {
     <div className="mt-20 flex flex-col items-center gap-7">
       <h1 className="text-4xl">
         Welcome to your clinic dashboard{" "}
-        {userName ? `Dr. ${userName}.` : "Doctor."}{" "}
+        {pracName ? `Dr. ${pracName}.` : "Doctor."}{" "}
       </h1>
       <div className="flex gap-7">
         <DashboardButton
