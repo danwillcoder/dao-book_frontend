@@ -13,8 +13,9 @@ function PatientDetails() {
 
   // Fetch patient info
   const [patientInfo, setPatientInfo] = useState({});
-  const [infoLoading, setInfoLoading] = useState(false);
+  const [infoLoading, setInfoLoading] = useState(true);
   const [error, setError] = useState(false);
+  const [isSaved, setIsSaved] = useState(false);
 
   // Fetch sessions
   const [sessionsData, setSessionsData] = useState([]);
@@ -30,6 +31,7 @@ function PatientDetails() {
         // Fix date field to only contain date
         currentData.dateOfBirth = dateTimeToDate(currentData.dateOfBirth);
         setPatientInfo(res.data.patient);
+        setInfoLoading(false);
       } catch (error) {
         console.error(error);
       }
@@ -38,9 +40,20 @@ function PatientDetails() {
     fetchPatientDetails().catch((error) => console.log(error));
   }, [patientId, token]);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(JSON.stringify(patientInfo));
+    try {
+      const res = await axiosInstance.put(
+        patientRoutes.put + patientId,
+        patientInfo,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+    } catch (error) {
+      setError(error);
+    }
+    setIsSaved(true);
   };
 
   const handleChange = (e) => {
@@ -51,6 +64,7 @@ function PatientDetails() {
       ...previousData,
       [name]: value,
     }));
+    setIsSaved(false);
   };
 
   return (
@@ -65,6 +79,7 @@ function PatientDetails() {
           handleChange={handleChange}
           handleSubmit={handleSubmit}
           isInitialConsult={false}
+          isSaved={isSaved}
         />
       )}
       <TextLink

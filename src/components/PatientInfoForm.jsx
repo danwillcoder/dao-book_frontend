@@ -6,9 +6,15 @@ function PatientInfoSubform({
   handleSubmit,
   formData,
   isInitialConsult,
+  isSaved,
 }) {
-  //TODO render formData as each input's default value
-  const buttonText = isInitialConsult ? "Next" : "Save";
+  let buttonText = isInitialConsult ? "Next" : "Save";
+  let buttonDisabled = false;
+  if (isSaved) {
+    buttonText = "Saved!";
+    buttonDisabled = true;
+  }
+
   return (
     <form
       className="px-15 flex max-w-2xl flex-col gap-4"
@@ -78,6 +84,7 @@ function PatientInfoSubform({
         theme="light"
         isFullWidth={true}
         buttonText={buttonText}
+        buttonDisabled={buttonDisabled}
       ></Button>
     </form>
   );

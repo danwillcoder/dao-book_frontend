@@ -8,12 +8,13 @@ import propTypes from "prop-types";
  @property {string} buttonText 
  @property {React.MouseEventHandler<HTMLButtonElement>} onClick
  @property {boolean} isFullWidth 
+ @property {boolean} buttonDisabled
  */
 
 /**
  * @param {buttonProps} props
  */
-function Button({ theme, buttonText, onClick, isFullWidth }) {
+function Button({ theme, buttonText, onClick, isFullWidth, buttonDisabled }) {
   const stylesOnEveryButton =
     "rounded-2xl border-4 px-2 py-2 font-sans font-semibold shadow-md";
 
@@ -35,16 +36,23 @@ function Button({ theme, buttonText, onClick, isFullWidth }) {
       "border-daobook-amber text-daobook-amber bg-white transition-colors transition-transform hover:scale-105 hover:bg-white/75 focus:ring dark:bg-black dark:text-white";
   }
 
+  let disabledStyle;
+  if (buttonDisabled) {
+    disabledStyle = "opacity-40";
+  }
+
   const finalStyles = classNames(
     stylesOnEveryButton,
     buttonThemeStyles,
-    widthFixed
+    widthFixed,
+    disabledStyle
   );
 
   return (
     <button
       className={finalStyles}
       onClick={onClick}
+      disabled={buttonDisabled}
     >
       {buttonText}
     </button>

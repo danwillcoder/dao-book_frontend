@@ -10,6 +10,7 @@ const pracRoutes = {
 const patientRoutes = {
   getAll: "/patients/prac/",
   getOne: "/patient/",
+  put: "/patient/",
   create: "/patient",
 };
 
