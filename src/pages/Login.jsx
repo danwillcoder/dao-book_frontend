@@ -25,7 +25,7 @@ function Login() {
     try {
       // Post form data
       const res = await axiosInstance.post(pracRoutes.login, formData);
-      // Receive JWT and store in both state & localStorage
+      // Receive JWT and store in both ctx & storage
       const token = res.data.token;
       const decodedToken = parseJwt(token);
       setToken(token);
@@ -37,6 +37,7 @@ function Login() {
         pracRoutes.get + decodedToken._id,
         { headers: { Authorization: `Bearer ${token}` } }
       );
+      // Store full name in ctx & storage
       const { firstName, lastName } = pracNameRes.data.prac;
       const fullName = `${firstName} ${lastName}`;
       setPracName(fullName);
