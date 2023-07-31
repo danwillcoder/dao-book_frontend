@@ -21,16 +21,21 @@ function PatientDetails() {
   const [sessionsData, setSessionsData] = useState([]);
   const [sessionsLoading, setSessionsLoading] = useState(true);
 
+  // Fetch initial patient data
   useEffect(() => {
+    // Async function to allow us to await in useEffect
     const fetchPatientDetails = async () => {
       try {
+        // Fetch data
         const res = await axiosInstance(patientRoutes.getOne + patientId, {
           headers: { Authorization: `Bearer ${token}` },
         });
+        // Pull out the data into a var to make it easier to work with
         const currentData = res.data.patient;
-        // Fix date field to only contain date
+        // Fix date field to only contain date, otherwise it contains time info too
         currentData.dateOfBirth = dateTimeToDate(currentData.dateOfBirth);
-        setPatientInfo(res.data.patient);
+
+        setPatientInfo(currentData);
         setInfoLoading(false);
       } catch (error) {
         console.error(error);
