@@ -54,6 +54,7 @@ function InitialConsultPatient() {
         formData={formData}
         handleChange={handleChange}
         handleSubmit={handleSubmit}
+        isInitialConsult={true}
       />
       {error && <p>{error}</p>}
       <hr className="my-20" />

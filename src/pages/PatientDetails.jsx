@@ -40,30 +40,18 @@ function PatientDetails() {
       {infoLoading ? (
         <p>Loading...</p>
       ) : (
-        <form
-          className="w-[700px]"
-          onSubmit={handleSubmit}
-        >
-          <PatientInfoSubform
-            formData={patientInfo}
-            handleChange={handleChange}
-          />
-          {!isSaved && (
-            <>
-              <Button
-                theme="light"
-                isFullWidth={true}
-                buttonText={actionButtonText}
-              ></Button>
-              <TextLink
-                linkText={"Back to patient list"}
-                linkDestination={"/patient-list"}
-                className={"my-10 text-center"}
-              ></TextLink>
-            </>
-          )}
-        </form>
+        <PatientInfoSubform
+          formData={patientInfo}
+          handleChange={handleChange}
+          handleSubmit={handleSubmit}
+          isInitialConsult={false}
+        />
       )}
+      <TextLink
+        linkText={"Back to patient list"}
+        linkDestination={"/patient-list"}
+        className={"my-10 text-center"}
+      ></TextLink>
       <div className="mb-10"></div>
     </div>
   );

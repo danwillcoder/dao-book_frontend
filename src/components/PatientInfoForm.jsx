@@ -1,9 +1,14 @@
 import Button from "../atoms/Button";
 import MemoFormInput from "../molecules/FormInput";
 
-function PatientInfoSubform({ handleChange, handleSubmit, formData }) {
+function PatientInfoSubform({
+  handleChange,
+  handleSubmit,
+  formData,
+  isInitialConsult,
+}) {
   //TODO render formData as each input's default value
-  const defaultDOBValue = "1990-01-01";
+  const buttonText = isInitialConsult ? "Next" : "Save";
   return (
     <form
       className="px-15 flex max-w-2xl flex-col gap-4"
@@ -43,7 +48,7 @@ function PatientInfoSubform({ handleChange, handleSubmit, formData }) {
         labelText="Date of Birth"
         isRequired={true}
         onChange={handleChange}
-        defaultValue={formData["dateOfBirth"] || defaultDOBValue}
+        defaultValue={formData["dateOfBirth"]}
       ></MemoFormInput>
       <MemoFormInput
         type="text"
@@ -72,7 +77,7 @@ function PatientInfoSubform({ handleChange, handleSubmit, formData }) {
       <Button
         theme="light"
         isFullWidth={true}
-        buttonText={"Next"}
+        buttonText={buttonText}
       ></Button>
     </form>
   );
