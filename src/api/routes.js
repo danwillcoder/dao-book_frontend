@@ -7,6 +7,7 @@ const pracRoutes = {
 };
 
 const patientRoutes = {
+  get: "/patients/prac/",
   create: "/patient",
 };
 
