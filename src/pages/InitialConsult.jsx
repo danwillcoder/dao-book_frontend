@@ -1,8 +1,13 @@
 import { useState } from "react";
 import { Navigate, useLocation } from "react-router-dom";
-import { axiosInstance, sessionRoutes } from "../api/routes";
+import {
+  axiosInstance,
+  prescriptionRoutes,
+  sessionRoutes,
+} from "../api/routes";
 import ConsultForm from "../components/ConsultForm";
 import useAuth from "../hooks/useAuth";
+import useErrorHandler from "../hooks/errorHandler";
 
 function InitialConsult() {
   const todaysDate = new Date().toISOString().split("T")[0];
@@ -19,12 +24,14 @@ function InitialConsult() {
     sendEmail: false,
   });
   const [error, setError] = useState({});
+  const errorHandler = useErrorHandler();
 
   const { patientId } = useLocation().state;
   const { token } = useAuth();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setError(null);
 
     // Unpack into two objects as we send 2x requests
     const sessionData = {
@@ -34,7 +41,9 @@ function InitialConsult() {
       tongueNotes: formData.tongueNotes,
       pulseNotes: formData.pulseNotes,
     };
+
     const prescriptionData = {
+      patientId,
       formulaName: formData.formulaName,
       composition: formData.composition,
       dosageAdministration: formData.dosageAdministration,
@@ -42,16 +51,25 @@ function InitialConsult() {
     };
 
     try {
-      const res = await axiosInstance.post(sessionRoutes.create, sessionData, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      const sessionRes = await axiosInstance.post(
+        sessionRoutes.create,
+        sessionData,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
 
-      console.log(res);
+      const prescriptionRes = await axiosInstance.post(
+        prescriptionRoutes.create,
+        prescriptionData,
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+
+      console.log(sessionRes);
+      console.log(prescriptionRes);
     } catch (error) {
-      setError({
-        status: error.response.status,
-        message: error.response.data.message,
-      });
+      console.log(error);
+      errorHandler(error, setError);
     }
   };
 
@@ -80,7 +98,7 @@ function InitialConsult() {
         handleSubmit={handleSubmit}
         isInitialConsult={true}
       />
-      {error && <p>{error.message}</p>}
+      {error && <p className="text-center font-bold">{error.message}</p>}
     </div>
   );
 }
