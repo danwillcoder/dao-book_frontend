@@ -58,11 +58,11 @@ function PatientInfoSubform({
       ></MemoFormInput>
       <MemoFormInput
         type="text"
-        name="phone"
+        name="phoneNumber"
         labelText="Phone Number"
         placeholderText="0401 234 567"
         onChange={handleChange}
-        defaultValue={formData["phone"]}
+        defaultValue={formData["phoneNumber"]}
       ></MemoFormInput>
       <MemoFormInput
         type="textArea"
@@ -74,11 +74,11 @@ function PatientInfoSubform({
       ></MemoFormInput>
       <MemoFormInput
         type="textArea"
-        name="history"
+        name="healthHistory"
         labelText="Health history"
         placeholderText=""
         onChange={handleChange}
-        defaultValue={formData["history"]}
+        defaultValue={formData["healthHistory"]}
       ></MemoFormInput>
       <Button
         theme="light"
