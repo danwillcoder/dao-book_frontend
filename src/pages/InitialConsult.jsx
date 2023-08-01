@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Navigate, useLocation } from "react-router-dom";
+import { Navigate, useNavigate, useLocation } from "react-router-dom";
 import {
   axiosInstance,
   prescriptionRoutes,
@@ -10,6 +10,14 @@ import useAuth from "../hooks/useAuth";
 import useErrorHandler from "../hooks/errorHandler";
 
 function InitialConsult() {
+  // Hooks
+  const locationState = useLocation().state;
+  const patientId = locationState?.patientId;
+  const errorHandler = useErrorHandler();
+  const navigate = useNavigate();
+  const { token } = useAuth();
+
+  // State
   const todaysDate = new Date().toISOString().split("T")[0];
   const [formData, setFormData] = useState({
     sessionDate: todaysDate,
@@ -24,10 +32,6 @@ function InitialConsult() {
     sendEmail: false,
   });
   const [error, setError] = useState({});
-  const errorHandler = useErrorHandler();
-
-  const { patientId } = useLocation().state;
-  const { token } = useAuth();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -64,11 +68,8 @@ function InitialConsult() {
         prescriptionData,
         { headers: { Authorization: `Bearer ${token}` } }
       );
-
-      console.log(sessionRes);
-      console.log(prescriptionRes);
+      navigate("/");
     } catch (error) {
-      console.log(error);
       errorHandler(error, setError);
     }
   };
