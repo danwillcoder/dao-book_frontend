@@ -12,9 +12,9 @@ function ReturnConsult() {
     tongueNotes: "",
     pulseNotes: "",
     formulaName: "",
-    formulaComposition: "",
-    formulaDosage: "",
-    lifestyleNotes: "",
+    composition: "",
+    dosageAdministration: "",
+    lifestyleAdvice: "",
     sendEmail: false,
   });
 
