@@ -26,7 +26,7 @@ function ReturnConsult() {
     patientId: selectedPatientId || "",
     sessionId: selectedSessionId || "",
     sessionDate: "",
-    complaint: "",
+    mainComplaint: "",
     sessionNotes: "",
     tongue: "",
     pulse: "",
@@ -72,7 +72,6 @@ function ReturnConsult() {
           }
         );
         const returnedSessionData = sessionRes.data?.session;
-        console.log(selectedSessionId);
 
         const prescriptionRes = await axiosInstance.get(
           prescriptionRoutes.getOne + selectedSessionId,
@@ -80,16 +79,20 @@ function ReturnConsult() {
             headers: { Authorization: `Basic ${token}` },
           }
         );
-        const returnedPrescriptionData = sessionRes.data?.session;
+        const returnedPrescriptionData = prescriptionRes.data?.prescriptions[0];
 
-        console.log(returnedPrescriptionData);
-        // const prescriptionRes = await axiosInstance.get(prescriptionRoutes.get);
-        //TODO Fetch prescription data and map over the same as below
-        const newSessionData = {};
-        const dataKeys = Object.keys(formData);
-        for (const key of dataKeys) {
-          newSessionData[key] = returnedSessionData[key];
-        }
+        const newSessionData = {
+          sessionDate: returnedSessionData?.sessionDate,
+          sessionNotes: returnedSessionData?.sessionNotes,
+          tongue: returnedSessionData?.tongue,
+          pulse: returnedSessionData?.pulse,
+          mainComplaint: returnedSessionData?.mainComplaint,
+          formulaName: returnedPrescriptionData?.formulaName,
+          composition: returnedPrescriptionData?.composition,
+          dosageAdministration: returnedPrescriptionData?.dosageAdministration,
+          lifestyleAdvice: returnedPrescriptionData?.lifestyleAdvice,
+          sendEmail: false,
+        };
 
         setFormData({
           ...formData,
@@ -116,7 +119,7 @@ function ReturnConsult() {
     // Unpack into two objects as we send 2x requests
     const sessionData = {
       patientId: formData.patientId,
-      complaint: formData.complaint,
+      mainComplaint: formData.mainComplaint,
       sessionNotes: formData.sessionNotes,
       tongue: formData.tongue,
       pulse: formData.pulse,
