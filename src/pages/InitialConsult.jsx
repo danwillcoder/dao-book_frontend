@@ -1,20 +1,19 @@
 import { useState } from "react";
-import { Navigate, useNavigate, useLocation } from "react-router-dom";
+import { Navigate, useLocation } from "react-router-dom";
 import {
   axiosInstance,
   prescriptionRoutes,
   sessionRoutes,
 } from "../api/routes";
 import ConsultForm from "../components/ConsultForm";
-import useAuth from "../hooks/useAuth";
 import useErrorHandler from "../hooks/errorHandler";
+import useAuth from "../hooks/useAuth";
 
 function InitialConsult() {
   // Hooks
   const locationState = useLocation().state;
   const patientId = locationState?.patientId;
   const errorHandler = useErrorHandler();
-  const navigate = useNavigate();
   const { token } = useAuth();
 
   // State
