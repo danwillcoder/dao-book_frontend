@@ -1,12 +1,11 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import Button from "../atoms/Button";
 import TitleLockup from "../atoms/TitleLockup";
-import useAuth from "../hooks/useAuth";
-
+import useLogout from "../hooks/useLogout";
 function Header() {
   const location = useLocation();
   const navigate = useNavigate();
-  const { setAuth, setToken, setPracName } = useAuth();
+  const logout = useLogout();
   const dashboardRoute = "/";
 
   // Only show dashboard button when not on dashboard
@@ -37,12 +36,7 @@ function Header() {
         <Button
           theme="light"
           buttonText="Logout"
-          onClick={() => {
-            localStorage.clear();
-            setAuth({});
-            setToken({});
-            setPracName({});
-          }}
+          onClick={logout}
         ></Button>
       </div>
     </header>
