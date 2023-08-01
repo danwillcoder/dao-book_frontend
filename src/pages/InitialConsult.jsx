@@ -20,7 +20,7 @@ function InitialConsult() {
   const todaysDate = new Date().toISOString().split("T")[0];
   const [formData, setFormData] = useState({
     sessionDate: todaysDate,
-    complaint: "",
+    mainComplaint: "",
     sessionNotes: "",
     tongue: "",
     pulse: "",
@@ -40,7 +40,7 @@ function InitialConsult() {
     // Unpack into two objects as we send 2x requests
     const sessionData = {
       patientId,
-      complaint: formData.complaint,
+      mainComplaint: formData.mainComplaint,
       sessionNotes: formData.sessionNotes,
       tongue: formData.tongue,
       pulse: formData.pulse,

@@ -20,10 +20,10 @@ function ConsultForm({ handleSubmit, handleChange, formData, isSaved }) {
         ></MemoFormInput>
         <MemoFormInput
           type="text"
-          name="complaint"
-          labelText="Main complaint"
+          name="mainComplaint"
+          labelText="Main Complaint"
           onChange={handleChange}
-          defaultValue={formData.complaint}
+          defaultValue={formData.mainComplaint}
         ></MemoFormInput>
         <MemoFormInput
           type="textArea"
