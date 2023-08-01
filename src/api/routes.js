@@ -19,6 +19,10 @@ const sessionRoutes = {
   create: "/session",
 };
 
+const prescriptionRoutes = {
+  create: "/prescription",
+};
+
 const axiosInstance = axios.create({
   baseURL: BASE_URL,
   headers: {
@@ -26,4 +30,10 @@ const axiosInstance = axios.create({
   },
 });
 
-export { axiosInstance, pracRoutes, patientRoutes, sessionRoutes };
+export {
+  axiosInstance,
+  pracRoutes,
+  patientRoutes,
+  sessionRoutes,
+  prescriptionRoutes,
+};
