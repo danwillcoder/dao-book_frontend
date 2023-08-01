@@ -15,7 +15,6 @@ function ReturnConsult() {
   const errorHandler = useErrorHandler();
   const { token, auth } = useAuth();
 
-  // TODO: make patient match here
   // If we arrived here from patientList, we should have a patient already active
   const location = useLocation();
   let selectedPatientId = location.state?.selectedPatientId;
@@ -35,7 +34,6 @@ function ReturnConsult() {
     sendEmail: false,
   });
   const [patients, setPatients] = useState([]);
-  const [activePatient, setActivePatient] = useState(selectedPatientId);
   const [error, setError] = useState({});
 
   useEffect(() => {
@@ -116,10 +114,7 @@ function ReturnConsult() {
           name="patientId"
           id="patientId"
           className="rounded-2xl border-2 border-[#DFDFDF] p-2 px-4 text-xl placeholder:text-[#DFDFDF]"
-          onChange={(e) => {
-            setActivePatient(e.target.value);
-            handleChange(e);
-          }}
+          onChange={handleChange}
           value={formData.patientId}
         >
           {patients.map((patient) => (
