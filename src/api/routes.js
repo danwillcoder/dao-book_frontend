@@ -16,10 +16,14 @@ const patientRoutes = {
 
 const sessionRoutes = {
   getAll: "/sessions/prac/",
+  getOne: "/session/",
+  getPatients: "/sessions/patient/",
+  put: "/session/",
   create: "/session",
 };
 
 const prescriptionRoutes = {
+  getOne: "/prescription/session/",
   create: "/prescription",
 };
 
