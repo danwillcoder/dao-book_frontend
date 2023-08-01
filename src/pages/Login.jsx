@@ -54,6 +54,7 @@ function Login() {
   };
 
   const handleChange = (e) => {
+    setError(null);
     const name = e.target.name;
     const value = e.target.value;
     setFormData((previousData) => ({

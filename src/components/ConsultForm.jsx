@@ -68,24 +68,24 @@ function ConsultForm({
         ></MemoFormInput>
         <MemoFormInput
           type="textArea"
-          name="formulaComposition"
+          name="composition"
           labelText="Composition"
           onChange={handleChange}
-          defaultValue={formData.formulaComposition}
+          defaultValue={formData.composition}
         ></MemoFormInput>
         <MemoFormInput
           type="textArea"
-          name="formulaDosage"
+          name="dosageAdministration"
           labelText="Dosage & administration"
           onChange={handleChange}
-          defaultValue={formData.formulaDosage}
+          defaultValue={formData.dosageAdministration}
         ></MemoFormInput>
         <MemoFormInput
           type="textArea"
-          name="lifestyleNotes"
+          name="lifestyleAdvice"
           labelText="Lifestyle notes"
           onChange={handleChange}
-          defaultValue={formData.lifestyleNotes}
+          defaultValue={formData.lifestyleAdvice}
         ></MemoFormInput>
         <MemoFormInput
           type="checkbox"

@@ -17,7 +17,7 @@ function parseJwt(token) {
 
 // Checks if the JWT expiry time is greater than the current epoch timestamp. If not, it's expired.
 function isJwtExpired(decodedToken) {
-  const JwtTimestampInSeconds = decodedToken.exp;
+  const JwtTimestampInSeconds = decodedToken?.exp;
   const timeNowAsEpochSecondTimestamp = Math.trunc(new Date().getTime() / 1000);
   return timeNowAsEpochSecondTimestamp <= JwtTimestampInSeconds;
 }
