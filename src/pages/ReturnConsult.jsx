@@ -19,7 +19,6 @@ function ReturnConsult() {
   // If we arrived here from patientList, we should have a patient already active
   const location = useLocation();
   let selectedPatientId = location.state?.selectedPatientId;
-  selectedPatientId = "64c759e7316d724c21b3e16a";
 
   // State
   const [formData, setFormData] = useState({
@@ -114,11 +113,14 @@ function ReturnConsult() {
       <div className="px-15 min-w-[500px] gap-4 text-center">
         <label htmlFor="patientName text-xl">Patient: </label>
         <select
-          name="patientName"
-          id="patientName"
+          name="patientId"
+          id="patientId"
           className="rounded-2xl border-2 border-[#DFDFDF] p-2 px-4 text-xl placeholder:text-[#DFDFDF]"
-          onChange={(e) => setActivePatient(e.target.value)}
-          defaultValue={activePatient}
+          onChange={(e) => {
+            setActivePatient(e.target.value);
+            handleChange(e);
+          }}
+          value={formData.patientId}
         >
           {patients.map((patient) => (
             <option
