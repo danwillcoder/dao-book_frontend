@@ -24,6 +24,7 @@ const sessionRoutes = {
 
 const prescriptionRoutes = {
   getOne: "/prescription/session/",
+  put: "/prescription/",
   create: "/prescription",
 };
 

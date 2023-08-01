@@ -25,6 +25,7 @@ function ReturnConsult() {
   const [formData, setFormData] = useState({
     patientId: selectedPatientId || "",
     sessionId: selectedSessionId || "",
+    prescriptionId: "",
     sessionDate: "",
     mainComplaint: "",
     sessionNotes: "",
@@ -81,12 +82,19 @@ function ReturnConsult() {
         );
         const returnedPrescriptionData = prescriptionRes.data?.prescriptions[0];
 
+        let prevSessionDate;
+
+        if (returnedSessionData.sessionDate) {
+          prevSessionDate = dateTimeToDate(returnedSessionData.sessionDate);
+        }
+
         const newSessionData = {
-          sessionDate: returnedSessionData?.sessionDate,
+          sessionDate: prevSessionDate || "",
           sessionNotes: returnedSessionData?.sessionNotes,
           tongue: returnedSessionData?.tongue,
           pulse: returnedSessionData?.pulse,
           mainComplaint: returnedSessionData?.mainComplaint,
+          prescriptionId: returnedPrescriptionData?._id,
           formulaName: returnedPrescriptionData?.formulaName,
           composition: returnedPrescriptionData?.composition,
           dosageAdministration: returnedPrescriptionData?.dosageAdministration,
@@ -118,6 +126,7 @@ function ReturnConsult() {
 
     // Unpack into two objects as we send 2x requests
     const sessionData = {
+      practitionerId: auth._id,
       patientId: formData.patientId,
       mainComplaint: formData.mainComplaint,
       sessionNotes: formData.sessionNotes,
@@ -126,6 +135,7 @@ function ReturnConsult() {
     };
 
     const prescriptionData = {
+      practitionerId: auth._id,
       patientId: formData.patientId,
       sessionId: formData.sessionId || "",
       formulaName: formData.formulaName,
@@ -148,10 +158,11 @@ function ReturnConsult() {
 
         const prescriptionRes = await axiosInstance.put(
           // Update with prescriptionId from session
-          prescriptionRoutes.put,
+          prescriptionRoutes.put + formData.prescriptionId,
           prescriptionData,
           { headers: { Authorization: `Bearer ${token}` } }
         );
+        console.log(prescriptionRes);
       } catch (error) {
         errorHandler(error, setError);
       }
