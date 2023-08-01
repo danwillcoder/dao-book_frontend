@@ -32,6 +32,7 @@ function InitialConsult() {
     sendEmail: false,
   });
   const [error, setError] = useState({});
+  const [isSaved, setIsSaved] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -52,6 +53,7 @@ function InitialConsult() {
       composition: formData.composition,
       dosageAdministration: formData.dosageAdministration,
       lifestyleAdvice: formData.lifestyleAdvice,
+      sendEmail: formData.sendEmail,
     };
 
     try {
@@ -63,12 +65,16 @@ function InitialConsult() {
         }
       );
 
+      // Use returned sessionId to send prescription
+      const sessionId = sessionRes.data.session._id;
+      prescriptionData.sessionId = sessionId;
+
       const prescriptionRes = await axiosInstance.post(
         prescriptionRoutes.create,
         prescriptionData,
         { headers: { Authorization: `Bearer ${token}` } }
       );
-      navigate("/");
+      setIsSaved(true);
     } catch (error) {
       errorHandler(error, setError);
     }
@@ -98,6 +104,7 @@ function InitialConsult() {
         handleChange={handleChange}
         handleSubmit={handleSubmit}
         isInitialConsult={true}
+        isSaved={isSaved}
       />
       {error && <p className="text-center font-bold">{error.message}</p>}
     </div>
