@@ -9,8 +9,8 @@ function ConsultForm({
   handleChange,
   isInitialConsult,
   formData,
+  isSaved,
 }) {
-  const [isSaved, setHasSaved] = useState();
   const [editMode, setEditMode] = useState(false);
   const actionButtonText = isInitialConsult ? "Save" : "Edit";
 
@@ -93,12 +93,14 @@ function ConsultForm({
           labelText="Email prescription & lifestyle notes"
           onChange={handleChange}
         ></MemoFormInput>
-        {!isSaved && (
+        {!isSaved ? (
           <Button
             theme="light"
             isFullWidth={true}
             buttonText={actionButtonText}
           ></Button>
+        ) : (
+          <p className="text-center font-bold">Saved!</p>
         )}
       </form>
       {isSaved ? (
