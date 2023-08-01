@@ -1,20 +1,9 @@
-import { useState } from "react";
 import Button from "../atoms/Button";
 import TextLink from "../atoms/TextLink";
 import MemoFormInput from "../molecules/FormInput";
-import PatientInfoSubform from "./PatientInfoForm";
 
-function ConsultForm({
-  handleSubmit,
-  handleChange,
-  isInitialConsult,
-  formData,
-  isSaved,
-}) {
-  const [editMode, setEditMode] = useState(false);
-  const actionButtonText = isInitialConsult ? "Save" : "Edit";
-
-  //TODO render formData as each input's default value
+function ConsultForm({ handleSubmit, handleChange, formData, isSaved }) {
+  const actionButtonText = "Save";
 
   return (
     <div className="flex flex-col flex-wrap content-center justify-center gap-4">
@@ -45,17 +34,17 @@ function ConsultForm({
         ></MemoFormInput>
         <MemoFormInput
           type="textArea"
-          name="tongueNotes"
+          name="tongue"
           labelText="Tongue"
           onChange={handleChange}
-          defaultValue={formData.tongueNotes}
+          defaultValue={formData.tongue}
         ></MemoFormInput>
         <MemoFormInput
           type="textArea"
-          name="pulseNotes"
+          name="pulse"
           labelText="Pulse"
           onChange={handleChange}
-          defaultValue={formData.pulseNotes}
+          defaultValue={formData.pulse}
         ></MemoFormInput>
         <hr className="my-10" />
         <h2 className="w-[700px] text-3xl">Prescription</h2>

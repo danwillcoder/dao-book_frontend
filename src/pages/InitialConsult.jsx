@@ -22,8 +22,8 @@ function InitialConsult() {
     sessionDate: todaysDate,
     complaint: "",
     sessionNotes: "",
-    tongueNotes: "",
-    pulseNotes: "",
+    tongue: "",
+    pulse: "",
     formulaName: "",
     composition: "",
     dosageAdministration: "",
@@ -42,8 +42,8 @@ function InitialConsult() {
       patientId,
       complaint: formData.complaint,
       sessionNotes: formData.sessionNotes,
-      tongueNotes: formData.tongueNotes,
-      pulseNotes: formData.pulseNotes,
+      tongue: formData.tongue,
+      pulse: formData.pulse,
     };
 
     const prescriptionData = {
