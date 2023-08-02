@@ -2,7 +2,13 @@ import Button from "../atoms/Button";
 import TextLink from "../atoms/TextLink";
 import MemoFormInput from "../molecules/FormInput";
 
-function ConsultForm({ handleSubmit, handleChange, formData, isSaved }) {
+function ConsultForm({
+  handleSubmit,
+  handleChange,
+  formData,
+  isSaved,
+  isDisabled,
+}) {
   const actionButtonText = "Save";
 
   return (
@@ -87,6 +93,7 @@ function ConsultForm({ handleSubmit, handleChange, formData, isSaved }) {
             theme="light"
             isFullWidth={true}
             buttonText={actionButtonText}
+            buttonDisabled={isDisabled}
           ></Button>
         ) : (
           <p className="text-center font-bold">Saved!</p>

@@ -202,6 +202,14 @@ function ReturnConsult() {
     }));
   };
 
+  // This ensures that the button isn't active when we are on the default select.
+  // Clunky but I don't know a way around this check.
+  let buttonShouldBeDisabled;
+
+  if (formData.patientId === "" || formData.patientId === "Select Patient") {
+    buttonShouldBeDisabled = true;
+  }
+
   return (
     <div className="flex flex-col">
       <h1 className="my-20 text-center text-4xl">Return Consult Form</h1>
@@ -217,9 +225,10 @@ function ReturnConsult() {
               name="patientId"
               id="patientId"
               className="rounded-2xl border-2 border-[#DFDFDF] p-2 px-4 text-xl placeholder:text-[#DFDFDF]"
-              onChange={handleChange}
+              onChange={(e) => handleChange(e)}
               value={formData.patientId}
             >
+              <option>Select Patient</option>
               {patients.map((patient) => (
                 <option
                   value={patient._id}
@@ -237,6 +246,7 @@ function ReturnConsult() {
         handleChange={handleChange}
         handleSubmit={handleSubmit}
         isInitialConsult={false}
+        isDisabled={buttonShouldBeDisabled}
       />
       {error && <p className="text-center font-bold">{error.message}</p>}
     </div>
