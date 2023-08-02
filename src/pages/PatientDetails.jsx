@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { axiosInstance, patientRoutes } from "../api/routes";
+import { Link, useParams } from "react-router-dom";
+import { axiosInstance, patientRoutes, sessionRoutes } from "../api/routes";
 import TextLink from "../atoms/TextLink";
 import PatientInfoSubform from "../components/PatientInfoForm";
 import useAuth from "../hooks/useAuth";
@@ -33,8 +33,9 @@ function PatientDetails() {
         // Pull out the data into a var to make it easier to work with
         const currentData = res.data.patient;
         // Fix date field to only contain date, otherwise it contains time info too
-        currentData.dateOfBirth = dateTimeToDate(currentData.dateOfBirth);
-
+        if (currentData.dateOfBirth) {
+          currentData.dateOfBirth = dateTimeToDate(currentData?.dateOfBirth);
+        }
         setPatientInfo(currentData);
         setInfoLoading(false);
       } catch (error) {
@@ -42,7 +43,24 @@ function PatientDetails() {
       }
     };
 
+    const fetchPatientSessions = async () => {
+      try {
+        // Fetch data
+        const res = await axiosInstance(sessionRoutes.getPatients + patientId, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        // Pull out the data into a var to make it easier to work with
+        const patientSessions = res?.data?.sessions;
+        setSessionsLoading(false);
+        setSessionsData(patientSessions);
+        // Fix date field to only contain date, otherwise it contains time info too
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
     fetchPatientDetails().catch((error) => console.log(error));
+    fetchPatientSessions().catch((error) => console.log(error));
   }, [patientId, token]);
 
   const handleSubmit = async (e) => {
@@ -86,6 +104,33 @@ function PatientDetails() {
           isInitialConsult={false}
           isSaved={isSaved}
         />
+      )}
+
+      {sessionsLoading ? (
+        <p>Loading</p>
+      ) : (
+        <div className="mt-4 flex flex-col gap-4">
+          {sessionsData.map((session) => {
+            return (
+              <Link
+                to={`/return-consult`}
+                key={session._id}
+                state={{
+                  selectedSessionId: session._id,
+                  selectedPatientId: patientId,
+                }}
+                className="rounded-2xl border-4 border-[#E3E3E3] bg-white px-2 py-2 font-sans font-semibold text-black shadow-md transition-colors transition-transform hover:scale-105 hover:bg-black/5 focus:ring dark:bg-black/50 dark:text-white dark:hover:bg-black/70"
+              >
+                {new Date(session.sessionDate).toLocaleDateString("au", {
+                  weekday: "long",
+                  day: "numeric",
+                  month: "long",
+                  year: "numeric",
+                })}
+              </Link>
+            );
+          })}
+        </div>
       )}
       <TextLink
         linkText={"Back to patient list"}

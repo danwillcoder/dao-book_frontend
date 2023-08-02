@@ -12,7 +12,7 @@ function InitialConsultPatient() {
     lastName: "",
     email: "",
     dateOfBirth: "",
-    phone: "",
+    phoneNumber: "",
     medications: "",
     history: "",
   });
