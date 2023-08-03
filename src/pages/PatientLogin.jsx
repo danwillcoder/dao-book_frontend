@@ -23,7 +23,6 @@ function PatientLogin() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(formData);
 
     try {
       // Post form data
@@ -31,12 +30,12 @@ function PatientLogin() {
       // Receive JWT and store in both ctx & storage
       const token = res.data.token;
       const decodedToken = parseJwt(token);
+      decodedToken.isPatient = true;
+
       setToken(token);
       setAuth(decodedToken);
       localStorage.setItem("auth", JSON.stringify(decodedToken));
       localStorage.setItem("authToken", JSON.stringify(res.data.token));
-
-      console.log(token, decodedToken);
 
       // Redirect
       navigate("/patient-dashboard", {
@@ -44,8 +43,8 @@ function PatientLogin() {
       });
     } catch (error) {
       setError({
-        status: error.response.status,
-        message: error.response.data.message,
+        status: error?.response?.status,
+        message: error?.response?.data?.message,
       });
     }
   };
