@@ -37,7 +37,7 @@ function PatientLogin() {
       localStorage.setItem("authToken", JSON.stringify(res.data.token));
 
       // Redirect
-      navigate("patient-dashboard", {
+      navigate("/mobile/patient-dashboard", {
         state: { patientId: decodedToken._id },
       });
     } catch (error) {
@@ -61,7 +61,10 @@ function PatientLogin() {
   return (
     <>
       {auth ? (
-        <Navigate to="/mobile/patient-dashboard" />
+        <Navigate
+          to="/mobile/patient-dashboard"
+          state={{ patientId: auth._id }}
+        />
       ) : (
         <div className="grid h-screen grid-cols-1 grid-rows-[minmax(150px,_25%)_2fr]">
           <div className="flex items-center justify-center bg-daobook-amber">
