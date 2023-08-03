@@ -7,6 +7,7 @@ import TitleLockup from "../atoms/TitleLockup";
 import useAuth from "../hooks/useAuth";
 import MemoFormInput from "../molecules/FormInput";
 import { parseJwt } from "../utils.js";
+import { useMediaQuery } from "react-responsive";
 
 function Login() {
   const [formData, setFormData] = useState({
@@ -17,6 +18,7 @@ function Login() {
   const [error, setError] = useState();
   const { auth, setAuth, setToken, setPracName } = useAuth();
   const navigate = useNavigate();
+  const isMobile = useMediaQuery({ query: "(max-width: 700px)" });
 
   const handleSubmit = async (e) => {
     setError(null);
@@ -62,6 +64,10 @@ function Login() {
       [name]: value,
     }));
   };
+
+  if (isMobile) {
+    console.log("Mobile");
+  }
 
   return (
     <>
