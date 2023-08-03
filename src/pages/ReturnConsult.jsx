@@ -40,6 +40,7 @@ function ReturnConsult() {
   const [patients, setPatients] = useState([]);
   const [activePatient, setActivePatient] = useState(null);
   const [error, setError] = useState({});
+  const [isSaved, setIsSaved] = useState(false);
 
   // Fetch initial data
   useEffect(() => {
@@ -186,10 +187,12 @@ function ReturnConsult() {
           prescriptionData,
           { headers: { Authorization: `Bearer ${token}` } }
         );
+        console.log(prescriptionRes);
       } catch (error) {
         errorHandler(error, setError);
       }
     }
+    setIsSaved(true);
   };
 
   const handleChange = (e) => {
@@ -247,6 +250,7 @@ function ReturnConsult() {
         handleSubmit={handleSubmit}
         isInitialConsult={false}
         isDisabled={buttonShouldBeDisabled}
+        isSaved={isSaved}
       />
       {error && <p className="text-center font-bold">{error.message}</p>}
     </div>

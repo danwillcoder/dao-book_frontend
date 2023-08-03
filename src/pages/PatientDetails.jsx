@@ -36,8 +36,8 @@ function PatientDetails() {
         if (currentData.dateOfBirth) {
           currentData.dateOfBirth = dateTimeToDate(currentData?.dateOfBirth);
         }
-        setPatientInfo(currentData);
         setInfoLoading(false);
+        setPatientInfo(currentData);
       } catch (error) {
         console.error(error);
       }
