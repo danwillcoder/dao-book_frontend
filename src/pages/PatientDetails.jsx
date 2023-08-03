@@ -5,6 +5,7 @@ import TextLink from "../atoms/TextLink";
 import PatientInfoSubform from "../components/PatientInfoForm";
 import useAuth from "../hooks/useAuth";
 import { dateTimeToDate } from "../utils";
+import SessionList from "../components/SessionList";
 
 function PatientDetails() {
   const { token } = useAuth();
@@ -109,28 +110,11 @@ function PatientDetails() {
       {sessionsLoading ? (
         <p>Loading</p>
       ) : (
-        <div className="mt-4 flex flex-col gap-4">
-          {sessionsData.map((session) => {
-            return (
-              <Link
-                to={`/return-consult`}
-                key={session._id}
-                state={{
-                  selectedSessionId: session._id,
-                  selectedPatientId: patientId,
-                }}
-                className="rounded-2xl border-4 border-[#E3E3E3] bg-white px-2 py-2 font-sans font-semibold text-black shadow-md transition-colors transition-transform hover:scale-105 hover:bg-black/5 focus:ring dark:bg-black/50 dark:text-white dark:hover:bg-black/70"
-              >
-                {new Date(session.sessionDate).toLocaleDateString("au", {
-                  weekday: "long",
-                  day: "numeric",
-                  month: "long",
-                  year: "numeric",
-                })}
-              </Link>
-            );
-          })}
-        </div>
+        <SessionList
+          sessionsData={sessionsData}
+          patientId={patientId}
+          isPatientView={false}
+        />
       )}
       <TextLink
         linkText={"Back to patient list"}
