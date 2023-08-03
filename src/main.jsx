@@ -4,19 +4,20 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import App from "./App.jsx";
 import { AuthProvider } from "./contexts/AuthProvider.jsx";
 import "./index.css";
+import ErrorPage from "./pages/ErrorPage.jsx";
 import InitialConsult from "./pages/InitialConsult.jsx";
 import InitialConsultPatient from "./pages/InitialConsultPatient.jsx";
 import KitchenSink from "./pages/KitchenSink.jsx";
 import Login from "./pages/Login.jsx";
 import MobileHome from "./pages/MobileHome.jsx";
 import PageLayout from "./pages/PageLayout.jsx";
+import PatientDashboard from "./pages/PatientDashboard.jsx";
 import PatientDetails from "./pages/PatientDetails.jsx";
 import PatientList from "./pages/PatientList.jsx";
 import PatientLogin from "./pages/PatientLogin.jsx";
 import ProtectedPages from "./pages/ProtectedPages.jsx";
 import Register from "./pages/Register.jsx";
 import ReturnConsult from "./pages/ReturnConsult.jsx";
-import ErrorPage from "./pages/ErrorPage.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
@@ -45,6 +46,10 @@ ReactDOM.createRoot(document.getElementById("root")).render(
             <Route
               path="/mobile/patient-login"
               element={<PatientLogin />}
+            />
+            <Route
+              path="/mobile/patient-dashboard"
+              element={<PatientDashboard />}
             />
             <Route element={<ProtectedPages />}>
               <Route
