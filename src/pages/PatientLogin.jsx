@@ -1,56 +1,49 @@
 import { useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
-import { axiosInstance, pracRoutes } from "../api/routes";
+import { axiosInstance, patientViewRoutes } from "../api/routes";
 import Button from "../atoms/Button";
-import TextLink from "../atoms/TextLink";
 import TitleLockup from "../atoms/TitleLockup";
 import useAuth from "../hooks/useAuth";
-import MemoFormInput from "../molecules/FormInput";
-import { parseJwt } from "../utils.js";
-import { useMediaQuery } from "react-responsive";
+import { MemoFormInput } from "../molecules/FormInput";
+import { parseJwt } from "../utils";
 
-function Login() {
+function PatientLogin() {
+  // Hooks
+  const { setToken, setAuth, auth } = useAuth();
+  const navigate = useNavigate();
+
+  // State
   const [formData, setFormData] = useState({
     email: "",
-    password: "",
+    dateOfBirth: "",
+    lastName: "",
   });
-
-  const [error, setError] = useState();
-  const { auth, setAuth, setToken, setPracName } = useAuth();
-  const navigate = useNavigate();
-  const isMobile = useMediaQuery({ query: "(max-width: 700px)" });
+  const [error, setError] = useState(null);
 
   const handleSubmit = async (e) => {
-    setError(null);
     e.preventDefault();
 
     try {
       // Post form data
-      const res = await axiosInstance.post(pracRoutes.login, formData);
+      const res = await axiosInstance.post(patientViewRoutes.login, formData);
       // Receive JWT and store in both ctx & storage
       const token = res.data.token;
       const decodedToken = parseJwt(token);
+      decodedToken.isPatient = true;
+
       setToken(token);
       setAuth(decodedToken);
       localStorage.setItem("auth", JSON.stringify(decodedToken));
       localStorage.setItem("authToken", JSON.stringify(res.data.token));
-      // Use token to fetch practitioner name
-      const pracNameRes = await axiosInstance.get(
-        pracRoutes.get + decodedToken._id,
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
-      // Store full name in ctx & storage
-      const { firstName, lastName } = pracNameRes.data.prac;
-      const fullName = `${firstName} ${lastName}`;
-      setPracName(fullName);
-      localStorage.setItem("pracName", JSON.stringify(fullName));
 
       // Redirect
-      navigate("/");
+      navigate("/mobile/patient-dashboard", {
+        state: { patientId: decodedToken._id },
+      });
     } catch (error) {
       setError({
-        status: error.response.status,
-        message: error.response.data.message,
+        status: error?.response?.status,
+        message: error?.response?.data?.message,
       });
     }
   };
@@ -65,25 +58,23 @@ function Login() {
     }));
   };
 
-  if (isMobile) {
-    return <Navigate to="/mobile" />;
-  }
-
   return (
     <>
       {auth ? (
-        <Navigate to="/" />
+        <Navigate
+          to="/mobile/patient-dashboard"
+          state={{ patientId: auth._id }}
+        />
       ) : (
-        <div className="grid h-screen grid-cols-2">
-          <div className="flex items-center justify-center bg-daobook-amber p-10">
+        <div className="grid h-screen grid-cols-1 grid-rows-[minmax(150px,_25%)_2fr]">
+          <div className="flex items-center justify-center bg-daobook-amber">
             <TitleLockup
-              isSubtitled={true}
+              isSubtitled={false}
               theme="light"
             />
           </div>
           <div className="flex flex-col flex-wrap content-evenly justify-center gap-4">
-            <h1 className="text-6xl">Login</h1>
-            <p className="text-2xl">Welcome back to clinic.</p>
+            <h1 className="text-6xl">Patient Login</h1>
             <form
               className="px-15 flex max-w-2xl flex-col gap-4"
               onSubmit={handleSubmit}
@@ -97,10 +88,17 @@ function Login() {
                 onChange={handleChange}
               ></MemoFormInput>
               <MemoFormInput
-                type="password"
-                name="password"
-                labelText="Password"
-                placeholderText="*****"
+                type="date"
+                name="dateOfBirth"
+                labelText="Date of Birth"
+                isRequired={true}
+                onChange={handleChange}
+              ></MemoFormInput>
+              <MemoFormInput
+                type="text"
+                name="lastName"
+                labelText="Last Name"
+                placeholderText="Reynolds"
                 isRequired={true}
                 onChange={handleChange}
               ></MemoFormInput>
@@ -117,12 +115,6 @@ function Login() {
                 </>
               )}
             </form>
-            <TextLink
-              linkText="Sign up here"
-              linkDestination={"/register"}
-              paragraphText="TCM Practitioner?"
-              className="mt-40"
-            />
           </div>
         </div>
       )}
@@ -130,4 +122,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default PatientLogin;

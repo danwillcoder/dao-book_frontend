@@ -163,7 +163,6 @@ function ReturnConsult() {
           prescriptionData,
           { headers: { Authorization: `Bearer ${token}` } }
         );
-        console.log(prescriptionRes);
       } catch (error) {
         errorHandler(error, setError);
       }
@@ -187,7 +186,6 @@ function ReturnConsult() {
           prescriptionData,
           { headers: { Authorization: `Bearer ${token}` } }
         );
-        console.log(prescriptionRes);
       } catch (error) {
         errorHandler(error, setError);
       }
