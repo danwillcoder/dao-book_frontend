@@ -10,9 +10,10 @@ function Header() {
 
   // Only show dashboard button when not on dashboard
   const isNotOnDashboard = location.pathname !== dashboardRoute;
+  const noHeader = ["/register", "/login", "/patient-login"];
 
   // No header on these pages
-  if (location.pathname === "/register" || location.pathname === "/login") {
+  if (noHeader.includes(location.pathname)) {
     return <></>;
   }
 
