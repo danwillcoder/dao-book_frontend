@@ -27,7 +27,6 @@ function PatientDashboard() {
         const patientSessions = res?.data?.sessions;
         setSessionsLoading(false);
         setSessionsData(patientSessions);
-        // Fix date field to only contain date, otherwise it contains time info too
       } catch (error) {
         console.error(error);
       }
