@@ -7,6 +7,10 @@ const pracRoutes = {
   get: "/prac/",
 };
 
+const patientViewRoutes = {
+  login: "/patient/login",
+};
+
 const patientRoutes = {
   getAll: "/patients/prac/",
   getOne: "/patient/",
@@ -41,4 +45,5 @@ export {
   patientRoutes,
   sessionRoutes,
   prescriptionRoutes,
+  patientViewRoutes,
 };

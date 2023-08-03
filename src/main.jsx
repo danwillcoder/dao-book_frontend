@@ -2,18 +2,19 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import App from "./App.jsx";
+import { AuthProvider } from "./contexts/AuthProvider.jsx";
 import "./index.css";
+import InitialConsult from "./pages/InitialConsult.jsx";
 import InitialConsultPatient from "./pages/InitialConsultPatient.jsx";
 import KitchenSink from "./pages/KitchenSink.jsx";
 import Login from "./pages/Login.jsx";
 import PageLayout from "./pages/PageLayout.jsx";
 import PatientDetails from "./pages/PatientDetails.jsx";
 import PatientList from "./pages/PatientList.jsx";
+import PatientLogin from "./pages/PatientLogin.jsx";
+import ProtectedPages from "./pages/ProtectedPages.jsx";
 import Register from "./pages/Register.jsx";
 import ReturnConsult from "./pages/ReturnConsult.jsx";
-import { AuthProvider } from "./contexts/AuthProvider.jsx";
-import ProtectedPages from "./pages/ProtectedPages.jsx";
-import InitialConsult from "./pages/InitialConsult.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
@@ -34,6 +35,10 @@ ReactDOM.createRoot(document.getElementById("root")).render(
             <Route
               path="/login"
               element={<Login />}
+            />
+            <Route
+              path="/patient-login"
+              element={<PatientLogin />}
             />
             <Route element={<ProtectedPages />}>
               <Route
