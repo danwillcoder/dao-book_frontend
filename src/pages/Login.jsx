@@ -66,7 +66,7 @@ function Login() {
   };
 
   if (isMobile) {
-    console.log("Mobile");
+    return <Navigate to="/mobile" />;
   }
 
   return (
