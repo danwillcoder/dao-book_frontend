@@ -60,6 +60,7 @@ function ConsultForm({
           labelText="Formula name"
           onChange={handleChange}
           defaultValue={formData.formulaName}
+          isRequired={true}
         ></MemoFormInput>
         <MemoFormInput
           type="textArea"
@@ -67,6 +68,7 @@ function ConsultForm({
           labelText="Composition"
           onChange={handleChange}
           defaultValue={formData.composition}
+          isRequired={true}
         ></MemoFormInput>
         <MemoFormInput
           type="textArea"
@@ -74,6 +76,7 @@ function ConsultForm({
           labelText="Dosage & administration"
           onChange={handleChange}
           defaultValue={formData.dosageAdministration}
+          isRequired={true}
         ></MemoFormInput>
         <MemoFormInput
           type="textArea"
@@ -81,6 +84,7 @@ function ConsultForm({
           labelText="Lifestyle notes"
           onChange={handleChange}
           defaultValue={formData.lifestyleAdvice}
+          isRequired={true}
         ></MemoFormInput>
         <MemoFormInput
           type="checkbox"
