@@ -8,6 +8,7 @@ import InitialConsult from "./pages/InitialConsult.jsx";
 import InitialConsultPatient from "./pages/InitialConsultPatient.jsx";
 import KitchenSink from "./pages/KitchenSink.jsx";
 import Login from "./pages/Login.jsx";
+import MobileHome from "./pages/MobileHome.jsx";
 import PageLayout from "./pages/PageLayout.jsx";
 import PatientDetails from "./pages/PatientDetails.jsx";
 import PatientList from "./pages/PatientList.jsx";
@@ -37,7 +38,11 @@ ReactDOM.createRoot(document.getElementById("root")).render(
               element={<Login />}
             />
             <Route
-              path="/patient-login"
+              path="/mobile"
+              element={<MobileHome />}
+            />
+            <Route
+              path="/mobile/patient-login"
               element={<PatientLogin />}
             />
             <Route element={<ProtectedPages />}>
