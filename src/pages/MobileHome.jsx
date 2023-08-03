@@ -11,7 +11,7 @@ function MobileHome() {
           theme="light"
         />
       </div>
-      <div className="mx-4 flex flex-col flex-wrap content-evenly justify-center gap-4">
+      <div className="mx-[10%] flex flex-col flex-wrap content-evenly justify-center gap-4">
         <p className="text-center text-2xl font-bold">
           Mobile view is only available for patients.
         </p>
