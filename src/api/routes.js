@@ -10,6 +10,8 @@ const pracRoutes = {
 const patientViewRoutes = {
   login: "/patient/login",
   getSessions: "/sessions/patient/",
+  getOneSession: "/session/patient/",
+  getPrescriptions: "/prescriptions/patient/",
 };
 
 const patientRoutes = {

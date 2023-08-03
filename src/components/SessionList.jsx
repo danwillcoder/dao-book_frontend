@@ -1,9 +1,7 @@
 import { Link } from "react-router-dom";
 
 function SessionList({ sessionsData, patientId, isPatientView }) {
-  const destinationLocation = isPatientView
-    ? "/patient-dashboard/session/"
-    : "/return-consult";
+  const destinationLocation = isPatientView ? "session/" : "/return-consult";
   return (
     <>
       {sessionsData ? (

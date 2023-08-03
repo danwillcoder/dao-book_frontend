@@ -18,6 +18,7 @@ import PatientLogin from "./pages/PatientLogin.jsx";
 import ProtectedPages from "./pages/ProtectedPages.jsx";
 import Register from "./pages/Register.jsx";
 import ReturnConsult from "./pages/ReturnConsult.jsx";
+import PatientSessions from "./pages/PatientSessions.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
@@ -50,6 +51,10 @@ ReactDOM.createRoot(document.getElementById("root")).render(
             <Route
               path="/mobile/patient-dashboard"
               element={<PatientDashboard />}
+            />
+            <Route
+              path="/mobile/patient-dashboard/session"
+              element={<PatientSessions />}
             />
             <Route element={<ProtectedPages />}>
               <Route
