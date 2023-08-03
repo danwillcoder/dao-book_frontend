@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { axiosInstance, patientViewRoutes } from "../api/routes";
 import useErrorHandler from "../hooks/errorHandler";
 import useAuth from "../hooks/useAuth";
 import { dateTimeToDate } from "../utils";
 import DetailDisplay from "../molecules/DetailDisplay";
+import Button from "../atoms/Button";
 
 function PatientSessions() {
   // Hooks
@@ -12,8 +13,11 @@ function PatientSessions() {
   const location = useLocation();
   const selectedPatientId = location.state?.selectedPatientId;
   const selectedSessionId = location.state?.selectedSessionId;
+  const navigate = useNavigate();
   const errorHandler = useErrorHandler();
+
   const [sessionData, setSessionData] = useState();
+  const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -67,57 +71,65 @@ function PatientSessions() {
   }, []);
 
   return (
-    <div className="flex flex-col">
-      {loading ? (
-        <p className="mt-4 text-center text-2xl font-bold">Loading...</p>
-      ) : (
-        <>
-          <h1 className="mx-2 my-10 text-center text-4xl">
-            Notes from{" "}
-            {new Date(sessionData?.sessionDate).toLocaleDateString("au", {
-              weekday: "long",
-              day: "numeric",
-              month: "long",
-              year: "numeric",
-            })}{" "}
-          </h1>
-          <div className="m-auto max-w-[500px]">
-            <DetailDisplay
-              labelText="Main Complaint"
-              valueText={sessionData.mainComplaint}
-            ></DetailDisplay>
-            <DetailDisplay
-              labelText="Session notes"
-              valueText={sessionData.sessionNotes}
-            ></DetailDisplay>
-            <DetailDisplay
-              labelText="Tongue"
-              valueText={sessionData.tongue}
-            ></DetailDisplay>
-            <DetailDisplay
-              labelText="Pulse"
-              valueText={sessionData.pulse}
-            ></DetailDisplay>
-            <DetailDisplay
-              labelText="Formula name"
-              valueText={sessionData.formulaName}
-              isRequired={true}
-            ></DetailDisplay>
-            <DetailDisplay
-              labelText="Composition"
-              valueText={sessionData.composition}
-            ></DetailDisplay>
-            <DetailDisplay
-              labelText="Dosage & administration"
-              valueText={sessionData.dosageAdministration}
-            ></DetailDisplay>
-            <DetailDisplay
-              labelText="Lifestyle notes"
-              isRequired={true}
-            ></DetailDisplay>
-          </div>
-        </>
-      )}
+    <div className="mx-8">
+      <div className="flex flex-col">
+        {error && <p>{error}</p>}
+        {loading ? (
+          <p className="mt-4 text-center text-2xl font-bold">Loading...</p>
+        ) : (
+          <>
+            <h1 className="mx-2 my-10 text-center text-4xl">
+              Notes from{" "}
+              {new Date(sessionData?.sessionDate).toLocaleDateString("au", {
+                weekday: "long",
+                day: "numeric",
+                month: "long",
+                year: "numeric",
+              })}{" "}
+            </h1>
+            <div className="m-auto max-w-[500px]">
+              <DetailDisplay
+                labelText="Main Complaint"
+                valueText={sessionData.mainComplaint}
+              ></DetailDisplay>
+              <DetailDisplay
+                labelText="Session notes"
+                valueText={sessionData.sessionNotes}
+              ></DetailDisplay>
+              <DetailDisplay
+                labelText="Tongue"
+                valueText={sessionData.tongue}
+              ></DetailDisplay>
+              <DetailDisplay
+                labelText="Pulse"
+                valueText={sessionData.pulse}
+              ></DetailDisplay>
+              <DetailDisplay
+                labelText="Formula name"
+                valueText={sessionData.formulaName}
+                isRequired={true}
+              ></DetailDisplay>
+              <DetailDisplay
+                labelText="Composition"
+                valueText={sessionData.composition}
+              ></DetailDisplay>
+              <DetailDisplay
+                labelText="Dosage & administration"
+                valueText={sessionData.dosageAdministration}
+              ></DetailDisplay>
+              <DetailDisplay
+                labelText="Lifestyle notes"
+                isRequired={true}
+              ></DetailDisplay>
+            </div>
+          </>
+        )}
+        <Button
+          buttonText="Back"
+          isFullWidth={true}
+          onClick={() => navigate(-1)}
+        />
+      </div>
     </div>
   );
 }
