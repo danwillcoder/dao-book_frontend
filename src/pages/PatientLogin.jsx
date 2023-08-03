@@ -1,16 +1,15 @@
 import { useState } from "react";
+import { Navigate, useNavigate } from "react-router-dom";
+import { axiosInstance, patientViewRoutes } from "../api/routes";
 import Button from "../atoms/Button";
 import TitleLockup from "../atoms/TitleLockup";
-import { MemoFormInput } from "../molecules/FormInput";
 import useAuth from "../hooks/useAuth";
-import { patientViewRoutes } from "../api/routes";
+import { MemoFormInput } from "../molecules/FormInput";
 import { parseJwt } from "../utils";
-import { axiosInstance } from "../api/routes";
-import { useNavigate } from "react-router-dom";
 
 function PatientLogin() {
   // Hooks
-  const { setToken, setAuth } = useAuth();
+  const { setToken, setAuth, auth } = useAuth();
   const navigate = useNavigate();
 
   // State
@@ -38,7 +37,7 @@ function PatientLogin() {
       localStorage.setItem("authToken", JSON.stringify(res.data.token));
 
       // Redirect
-      navigate("/patient-dashboard", {
+      navigate("patient-dashboard", {
         state: { patientId: decodedToken._id },
       });
     } catch (error) {
@@ -60,57 +59,63 @@ function PatientLogin() {
   };
 
   return (
-    <div className="grid h-screen grid-cols-1 grid-rows-[minmax(150px,_25%)_2fr]">
-      <div className="flex items-center justify-center bg-daobook-amber">
-        <TitleLockup
-          isSubtitled={false}
-          theme="light"
-        />
-      </div>
-      <div className="flex flex-col flex-wrap content-evenly justify-center gap-4">
-        <h1 className="text-6xl">Patient Login</h1>
-        <form
-          className="px-15 flex max-w-2xl flex-col gap-4"
-          onSubmit={handleSubmit}
-        >
-          <MemoFormInput
-            type="email"
-            name="email"
-            labelText="Email"
-            placeholderText="susan@example.com"
-            isRequired={true}
-            onChange={handleChange}
-          ></MemoFormInput>
-          <MemoFormInput
-            type="date"
-            name="dateOfBirth"
-            labelText="Date of Birth"
-            isRequired={true}
-            onChange={handleChange}
-          ></MemoFormInput>
-          <MemoFormInput
-            type="text"
-            name="lastName"
-            labelText="Last Name"
-            placeholderText="Reynolds"
-            isRequired={true}
-            onChange={handleChange}
-          ></MemoFormInput>
-          <Button
-            theme="light"
-            isFullWidth={true}
-            buttonText="Login"
-          ></Button>
-          {error && (
-            <>
-              <p className="font-bold">
-                Something went wrong, please try again.
-              </p>
-            </>
-          )}
-        </form>
-      </div>
-    </div>
+    <>
+      {auth ? (
+        <Navigate to="/mobile/patient-dashboard" />
+      ) : (
+        <div className="grid h-screen grid-cols-1 grid-rows-[minmax(150px,_25%)_2fr]">
+          <div className="flex items-center justify-center bg-daobook-amber">
+            <TitleLockup
+              isSubtitled={false}
+              theme="light"
+            />
+          </div>
+          <div className="flex flex-col flex-wrap content-evenly justify-center gap-4">
+            <h1 className="text-6xl">Patient Login</h1>
+            <form
+              className="px-15 flex max-w-2xl flex-col gap-4"
+              onSubmit={handleSubmit}
+            >
+              <MemoFormInput
+                type="email"
+                name="email"
+                labelText="Email"
+                placeholderText="susan@example.com"
+                isRequired={true}
+                onChange={handleChange}
+              ></MemoFormInput>
+              <MemoFormInput
+                type="date"
+                name="dateOfBirth"
+                labelText="Date of Birth"
+                isRequired={true}
+                onChange={handleChange}
+              ></MemoFormInput>
+              <MemoFormInput
+                type="text"
+                name="lastName"
+                labelText="Last Name"
+                placeholderText="Reynolds"
+                isRequired={true}
+                onChange={handleChange}
+              ></MemoFormInput>
+              <Button
+                theme="light"
+                isFullWidth={true}
+                buttonText="Login"
+              ></Button>
+              {error && (
+                <>
+                  <p className="font-bold">
+                    Something went wrong, please try again.
+                  </p>
+                </>
+              )}
+            </form>
+          </div>
+        </div>
+      )}
+    </>
   );
 }
 
