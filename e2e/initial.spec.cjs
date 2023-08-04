@@ -36,6 +36,29 @@ test.describe("Initial Consult", () => {
       await route.fulfill({ body: JSON.stringify(pracJson) });
     });
 
+    await page.route(`**/*/patients/prac/${fakePracId}`, async (route) => {
+      const patientsJson = {
+        message: "Fetched patients successfully.",
+        patients: [
+          {
+            _id: "64cc52a8faf3566c6ce4c872",
+            firstName: "James",
+            lastName: "Howlett",
+            dateOfBirth: "1950-01-01T00:00:00.000Z",
+            email: "jamesHowlett@example.com",
+            phoneNumber: "0401 234 567",
+            medications: "Regular whiskey",
+            healthHistory: "Adamantine skin, subdermal claws",
+            practitionerId: "64c70ba70c6f403199bac2ec",
+            practitionerName: "TestFname TestLname",
+            __v: 0,
+          },
+        ],
+      };
+
+      await route.fulfill({ body: JSON.stringify(patientsJson) });
+    });
+
     await page.route(`**/*/patient`, async (route) => {
       const createPatientJson = {
         message: "Created patient successfully.",
@@ -139,5 +162,22 @@ test.describe("Initial Consult", () => {
       .fill("Maybe do less fighting...?");
     await page.getByRole("button", { name: "Save" }).click();
     await expect(page.getByText("Saved!")).toBeVisible();
+  });
+
+  test("should show the initial consult in the patient list", async ({
+    page,
+  }) => {
+    // Login
+    await page
+      .getByPlaceholder("susan@example.com")
+      .fill("testEmail@example.com");
+    await page.getByPlaceholder("*****").fill("daobook");
+    await page.getByRole("button", { name: "Login" }).click();
+    // Check the consultations
+    await page.getByRole("button", { name: "Patient List" }).click();
+    await expect(
+      page.getByRole("heading", { name: "Patient List" })
+    ).toBeVisible();
+    await expect(page.getByText("James Howlett")).toBeVisible();
   });
 });
