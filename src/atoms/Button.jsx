@@ -14,7 +14,14 @@ import propTypes from "prop-types";
 /**
  * @param {buttonProps} props
  */
-function Button({ theme, buttonText, onClick, isFullWidth, buttonDisabled }) {
+function Button({
+  theme,
+  buttonText,
+  onClick,
+  isFullWidth,
+  buttonDisabled,
+  otherClasses,
+}) {
   const stylesOnEveryButton =
     "rounded-2xl border-4 px-2 py-2 font-sans font-semibold shadow-md";
 
@@ -45,7 +52,8 @@ function Button({ theme, buttonText, onClick, isFullWidth, buttonDisabled }) {
     stylesOnEveryButton,
     buttonThemeStyles,
     widthFixed,
-    disabledStyle
+    disabledStyle,
+    otherClasses
   );
 
   return (

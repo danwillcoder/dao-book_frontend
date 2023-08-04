@@ -124,6 +124,13 @@ function Login() {
               className="mt-40"
             />
           </div>
+          <Button
+            buttonText="Patient Login"
+            theme="light"
+            isFullWidth={false}
+            onClick={() => navigate("/mobile/patient-login")}
+            otherClasses="w-[200px] absolute right-4 top-4"
+          ></Button>
         </div>
       )}
     </>
