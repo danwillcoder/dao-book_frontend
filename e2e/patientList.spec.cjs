@@ -34,7 +34,6 @@ test.describe("Patient List", () => {
           __v: 0,
         },
       };
-      console.log(route.request());
       await route.fulfill({ body: JSON.stringify(pracJson) });
     });
 
