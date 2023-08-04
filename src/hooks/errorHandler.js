@@ -6,13 +6,13 @@ const useErrorHandler = () => {
   const logout = useLogout();
 
   function errorHandler(error, setError) {
-    if (error.response.data.message === "jwt expired") {
+    if (error.response?.data?.message === "jwt expired") {
       logout();
       navigate("/login");
     }
     setError({
-      status: error.response.status,
-      message: error.response.data.message,
+      status: error.response?.status,
+      message: error.response?.data?.message,
     });
   }
 
