@@ -1,30 +1,8 @@
 const { test, expect } = require("@playwright/test");
-
-/**
- *
- * @param {string} originalToken A complete JWT token
- * @param {number} newExpiration
- * @returns JWT with updated timestamp
- */
-function updateJwtExpiration(originalToken, newExpiration) {
-  const [headerBase64, payloadBase64, signatureBase64] =
-    originalToken.split(".");
-
-  const payload = JSON.parse(atob(payloadBase64));
-  payload.exp = newExpiration;
-  const updatedPayloadBase64 = btoa(JSON.stringify(payload));
-
-  const updatedToken = `${headerBase64}.${updatedPayloadBase64}.${signatureBase64}`;
-
-  return updatedToken;
-}
-
-module.exports = {
-  updateJwtExpiration,
-};
+const { updateJwtExpiration } = require("./testUtils.cjs");
 
 test.describe("Register", () => {
-  const fakePracId = "64c795c2b4524e92922cdc9b";
+  const fakePracId = "64c70ba70c6f403199bac2ec";
 
   test.beforeEach(async ({ page }) => {
     await page.goto("register");
@@ -97,18 +75,18 @@ test.describe("Login", () => {
       await route.fulfill({ body: JSON.stringify(loginJson) });
     });
 
-    const fakePracId = "64c795c2b4524e92922cdc9b";
+    const fakePracId = "64c70ba70c6f403199bac2ec";
 
     await page.route(`**/*/prac/${fakePracId}`, async (route) => {
       const pracJson = {
         message: "Prac fetched.",
         prac: {
-          _id: fakePracId,
           firstName: "TestName",
           lastName: "TestLast",
-          email: "test@test.com",
+          email: "testEmail@example.com",
           password:
             "$2a$10$ApcuKTdzYGpyiXe3BCcy5uvlIUtAzGGzXjyO3u4nfGWAt8wzOVdUu",
+          _id: fakePracId,
           __v: 0,
         },
       };
