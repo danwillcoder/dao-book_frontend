@@ -118,7 +118,6 @@ test.describe("Initial Consult", () => {
       };
       await route.fulfill({ body: JSON.stringify(createPrescriptionJson) });
     });
-    //http://localhost:5941/prescription
   });
 
   test("should let me add an initial consult", async ({ page }) => {
