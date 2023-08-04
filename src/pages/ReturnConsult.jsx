@@ -90,7 +90,7 @@ function ReturnConsult() {
         }
 
         const newSessionData = {
-          sessionDate: prevSessionDate || "",
+          sessionDate: prevSessionDate || returnedSessionData?.sessionDate,
           sessionNotes: returnedSessionData?.sessionNotes,
           tongue: returnedSessionData?.tongue,
           pulse: returnedSessionData?.pulse,
@@ -128,6 +128,7 @@ function ReturnConsult() {
     // Unpack into two objects as we send 2x requests
     const sessionData = {
       practitionerId: auth._id,
+      sessionDate: formData.sessionDate,
       patientId: formData.patientId,
       mainComplaint: formData.mainComplaint,
       sessionNotes: formData.sessionNotes,

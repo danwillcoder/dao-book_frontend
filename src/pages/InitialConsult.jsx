@@ -40,6 +40,7 @@ function InitialConsult() {
     // Unpack into two objects as we send 2x requests
     const sessionData = {
       patientId,
+      sessionDate: formData.sessionDate,
       mainComplaint: formData.mainComplaint,
       sessionNotes: formData.sessionNotes,
       tongue: formData.tongue,
