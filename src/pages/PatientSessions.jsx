@@ -120,6 +120,7 @@ function PatientSessions() {
               <DetailDisplay
                 labelText="Lifestyle notes"
                 isRequired={true}
+                valueText={sessionData.lifestyleAdvice}
               ></DetailDisplay>
             </div>
           </>
