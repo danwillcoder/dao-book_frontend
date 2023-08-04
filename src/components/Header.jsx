@@ -2,12 +2,14 @@ import { useLocation, useNavigate } from "react-router-dom";
 import Button from "../atoms/Button";
 import TitleLockup from "../atoms/TitleLockup";
 import useLogout from "../hooks/useLogout";
+import useAuth from "../hooks/useAuth";
 
 function Header() {
   const location = useLocation();
   const navigate = useNavigate();
   const logout = useLogout();
-  const dashboardRoute = "/";
+  const { auth } = useAuth();
+  const dashboardRoute = auth?.isPatient ? "/mobile/patient-dashboard" : "/";
 
   // Only show dashboard button when not on dashboard
   const isNotOnDashboard = location.pathname !== dashboardRoute;
