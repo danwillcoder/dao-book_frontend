@@ -2,6 +2,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import Button from "../atoms/Button";
 import TitleLockup from "../atoms/TitleLockup";
 import useLogout from "../hooks/useLogout";
+
 function Header() {
   const location = useLocation();
   const navigate = useNavigate();
@@ -18,7 +19,7 @@ function Header() {
   }
 
   return (
-    <header className="flex place-content-between items-center bg-daobook-amber p-6">
+    <header className="flex flex-col place-content-between items-center bg-daobook-amber p-6 md:flex-row">
       <TitleLockup
         theme="light"
         isSubtitled={false}
