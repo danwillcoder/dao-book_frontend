@@ -9,7 +9,7 @@ function ProtectedPages() {
 
   const isMobile = useMediaQuery({ query: "(max-width: 700px)" });
 
-  if (isMobile || auth?.isPatient === true) {
+  if (isMobile && auth?.isPatient === true) {
     return <Navigate to="/mobile" />;
   }
 
