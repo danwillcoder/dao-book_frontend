@@ -17,7 +17,7 @@ describe("Button", () => {
       ></Button>
     );
     expect(screen.getByText("Test String")).toHaveClass(
-      "border-daobook-amber text-daobook-amber transition-colors transition-transform hover:scale-105 hover:bg-black/75 focus:ring dark:bg-black"
+      "rounded-2xl border-4 px-2 py-2 font-sans font-semibold shadow-md border-daobook-amber text-daobook-amber bg-white transition-colors transition-transform hover:scale-105 hover:bg-white/75 focus:ring dark:bg-black dark:text-white w-32"
     );
   });
   it("renders the dark theme", () => {
