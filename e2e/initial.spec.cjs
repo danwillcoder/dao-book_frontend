@@ -155,7 +155,6 @@ test.describe("Initial Consult", () => {
     await page
       .getByLabel("Dosage & administration* (required)")
       .fill("Taken liberally");
-    await page.getByLabel("Lifestyle notes* (required)").click();
     await page
       .getByLabel("Lifestyle notes* (required)")
       .fill("Maybe do less fighting...?");
