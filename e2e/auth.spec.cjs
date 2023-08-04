@@ -103,7 +103,7 @@ test.describe("Login", () => {
       .getByPlaceholder("susan@example.com")
       .fill("testEmail@example.com");
     await page.getByPlaceholder("*****").fill("daobook");
-    await page.getByRole("button", { name: "Login" }).click();
+    await page.getByRole("button", { name: "Login", exact: true }).click();
     await expect(
       await page.getByRole("heading", { name: "Welcome to your clinic" })
     ).toBeVisible();
@@ -113,7 +113,7 @@ test.describe("Login", () => {
     await page
       .getByPlaceholder("susan@example.com")
       .fill("testEmail@example.com");
-    await page.getByRole("button", { name: "Login" }).click();
+    await page.getByRole("button", { name: "Login", exact: true }).click();
     const invalidLocator = page.locator("input#password[required]:invalid");
     const invalidPseudoclass = await invalidLocator.evaluate((el) =>
       el.matches(":invalid")

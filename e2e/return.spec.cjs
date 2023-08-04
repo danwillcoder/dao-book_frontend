@@ -214,6 +214,7 @@ test.describe("Returning Consult", () => {
       };
       await route.fulfill({ body: JSON.stringify(createdPrescriptionJson) });
     });
+
     await page.route(
       `**/*/prescription/${"64cc7acede3fa381bc5c0c1d"}`,
       async (route) => {
@@ -245,7 +246,7 @@ test.describe("Returning Consult", () => {
       .getByPlaceholder("susan@example.com")
       .fill("testEmail@example.com");
     await page.getByPlaceholder("*****").fill("daobook");
-    await page.getByRole("button", { name: "Login" }).click();
+    await page.getByRole("button", { name: "Login", exact: true }).click();
 
     // Fill out consult form
     await page.getByRole("button", { name: "Return Consult" }).click();
@@ -277,7 +278,7 @@ test.describe("Returning Consult", () => {
       .getByPlaceholder("susan@example.com")
       .fill("testEmail@example.com");
     await page.getByPlaceholder("*****").fill("daobook");
-    await page.getByRole("button", { name: "Login" }).click();
+    await page.getByRole("button", { name: "Login", exact: true }).click();
     // Check the consultations
     await page.getByRole("button", { name: "Patient List" }).click();
     await expect(
@@ -303,7 +304,7 @@ test.describe("Returning Consult", () => {
       .getByPlaceholder("susan@example.com")
       .fill("testEmail@example.com");
     await page.getByPlaceholder("*****").fill("daobook");
-    await page.getByRole("button", { name: "Login" }).click();
+    await page.getByRole("button", { name: "Login", exact: true }).click();
     // Check the consultations
     await page.getByRole("button", { name: "Patient List" }).click();
     await expect(

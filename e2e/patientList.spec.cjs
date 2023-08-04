@@ -264,7 +264,7 @@ test.describe("Patient List", () => {
       .getByPlaceholder("susan@example.com")
       .fill("testEmail@example.com");
     await page.getByPlaceholder("*****").fill("daobook");
-    await page.getByRole("button", { name: "Login" }).click();
+    await page.getByRole("button", { name: "Login", exact: true }).click();
     // Check the consultations
     await page.getByRole("button", { name: "Patient List" }).click();
     await expect(
@@ -279,7 +279,7 @@ test.describe("Patient List", () => {
       .getByPlaceholder("susan@example.com")
       .fill("testEmail@example.com");
     await page.getByPlaceholder("*****").fill("daobook");
-    await page.getByRole("button", { name: "Login" }).click();
+    await page.getByRole("button", { name: "Login", exact: true }).click();
     // Check the consultations
     await page.getByRole("button", { name: "Patient List" }).click();
     await expect(
