@@ -287,6 +287,7 @@ test.describe("Patient List", () => {
     ).toBeVisible();
     await expect(page.getByText("James Howlett")).toBeVisible();
     await page.getByText("James Howlett").click();
+    // Update the fields
     await page.getByPlaceholder("Susan", { exact: true }).fill("The");
     await page.getByPlaceholder("Reynolds").fill("Wolverine");
     await page
