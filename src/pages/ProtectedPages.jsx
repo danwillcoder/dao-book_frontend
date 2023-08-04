@@ -7,16 +7,10 @@ import { useMediaQuery } from "react-responsive";
 function ProtectedPages() {
   const { auth, token } = useAuth();
 
-  const isMobile = useMediaQuery({ query: "(max-width: 700px)" });
-
   // If patient, don't allow to see protected pages
   if (auth?.isPatient === true) {
     return <Navigate to="/mobile" />;
   }
-
-  // if (isMobile && auth?.isPatient === true) {
-  //   return <Navigate to="/mobile" />;
-  // }
 
   if (isJwtExpired(token)) {
     return <Navigate to="/login" />;
