@@ -19,6 +19,37 @@ describe("Form Input", () => {
     expect(screen.getByText(/required/)).toBeInTheDocument();
   });
 
+  it("shows a checkbox", () => {
+    render(
+      <FormInput
+        labelText="Test String"
+        type="checkbox"
+        name="testInput"
+      ></FormInput>
+    );
+    expect(screen.getByText(/Test String/)).toBeInTheDocument();
+    expect(screen.getByLabelText(/Test String/)).toHaveAttribute(
+      "type",
+      "checkbox"
+    );
+  });
+
+  it("shows a text area", () => {
+    render(
+      <FormInput
+        labelText="Test String"
+        type="textArea"
+        name="testInput"
+        placeholderText="Test String"
+      ></FormInput>
+    );
+    expect(screen.getByText(/Test String/)).toBeInTheDocument();
+    expect(screen.getByLabelText(/Test String/)).toHaveAttribute(
+      "type",
+      "textArea"
+    );
+  });
+
   it("shows the correct type", () => {
     render(
       <FormInput

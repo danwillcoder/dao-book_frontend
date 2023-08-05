@@ -20,6 +20,7 @@ describe("Button", () => {
       "rounded-2xl border-4 px-2 py-2 font-sans font-semibold shadow-md border-daobook-amber text-daobook-amber bg-white transition-colors transition-transform hover:scale-105 hover:bg-white/75 focus:ring dark:bg-black dark:text-white w-32"
     );
   });
+
   it("renders the dark theme", () => {
     render(
       <Button
@@ -31,6 +32,7 @@ describe("Button", () => {
       "border-daobook-amber bg-daobook-amber text-white dark:border-daobook-amber-dark transition-colors transition-transform hover:scale-105 hover:bg-daobook-amber/80 focus:ring"
     );
   });
+
   it("renders the neutral theme", () => {
     render(
       <Button
@@ -72,6 +74,16 @@ describe("Button", () => {
     expect(screen.getByText("Normal Width")).toHaveClass("w-32");
   });
 
+  it("renders disabled correctly", () => {
+    render(
+      <Button
+        buttonText="Test Button"
+        isFullWidth={true}
+        buttonDisabled={true}
+      ></Button>
+    );
+    expect(screen.getByText("Test Button")).toHaveClass("opacity-40");
+  });
   it("calls the callback it's given", () => {
     const clickHandler = vi.fn();
 
