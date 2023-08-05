@@ -1,13 +1,10 @@
 import { useState } from "react";
 import { Navigate, useLocation } from "react-router-dom";
-import {
-  axiosInstance,
-  prescriptionRoutes,
-  sessionRoutes,
-} from "../api/routes";
+import { prescriptionRoutes, sessionRoutes } from "../api/routes";
 import ConsultForm from "../components/ConsultForm";
 import useErrorHandler from "../hooks/errorHandler";
 import useAuth from "../hooks/useAuth";
+import { sendData } from "../api/requests";
 
 function InitialConsult() {
   // Hooks
@@ -57,23 +54,24 @@ function InitialConsult() {
     };
 
     try {
-      const sessionRes = await axiosInstance.post(
-        sessionRoutes.create,
-        sessionData,
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      );
+      const sessionRes = await sendData({
+        route: sessionRoutes.create,
+        token: token,
+        data: sessionData,
+        method: "POST",
+      });
 
       // Use returned sessionId to send prescription
       const sessionId = sessionRes.data.session._id;
       prescriptionData.sessionId = sessionId;
 
-      const prescriptionRes = await axiosInstance.post(
-        prescriptionRoutes.create,
-        prescriptionData,
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
+      const prescriptionRes = await sendData({
+        route: prescriptionRoutes.create,
+        token: token,
+        data: prescriptionData,
+        method: "POST",
+      });
+
       setIsSaved(true);
     } catch (error) {
       errorHandler(error, setError);

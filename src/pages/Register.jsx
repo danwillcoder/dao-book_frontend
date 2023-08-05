@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { axiosInstance, pracRoutes } from "../api/routes";
+import { pracRoutes } from "../api/routes";
 import Button from "../atoms/Button";
 import TextLink from "../atoms/TextLink";
 import TitleLockup from "../atoms/TitleLockup";
 import MemoFormInput from "../molecules/FormInput";
+import { sendData } from "../api/requests";
 
 function Register() {
   const [formData, setFormData] = useState({
@@ -22,7 +23,11 @@ function Register() {
     e.preventDefault();
 
     try {
-      await axiosInstance.post(pracRoutes.register, formData);
+      await sendData({
+        route: pracRoutes.register,
+        data: formData,
+        method: "POST",
+      });
       setIsSuccessLoading(true);
       setTimeout(() => {
         setIsSuccessLoading(false);

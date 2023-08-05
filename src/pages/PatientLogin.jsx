@@ -1,11 +1,12 @@
 import { useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
-import { axiosInstance, patientViewRoutes } from "../api/routes";
+import { patientViewRoutes } from "../api/routes";
 import Button from "../atoms/Button";
 import TitleLockup from "../atoms/TitleLockup";
 import useAuth from "../hooks/useAuth";
 import { MemoFormInput } from "../molecules/FormInput";
 import { parseJwt } from "../utils";
+import { sendData } from "../api/requests";
 
 function PatientLogin() {
   // Hooks
@@ -25,10 +26,17 @@ function PatientLogin() {
 
     try {
       // Post form data
-      const res = await axiosInstance.post(patientViewRoutes.login, formData);
+      const res = await sendData({
+        route: patientViewRoutes.login,
+        data: formData,
+        method: "POST",
+      });
+
       // Receive JWT and store in both ctx & storage
-      const token = res.data.token;
+      const token = res?.data?.token;
       const decodedToken = parseJwt(token);
+
+      // Set is patient to protect doctor routes
       decodedToken.isPatient = true;
 
       setToken(token);

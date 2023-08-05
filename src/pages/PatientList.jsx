@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { axiosInstance, patientRoutes } from "../api/routes";
+import { patientRoutes } from "../api/routes";
 import useAuth from "../hooks/useAuth";
+import { fetchData } from "../api/requests";
 
 function PatientList() {
   const { token, auth, pracName } = useAuth();
@@ -10,10 +11,12 @@ function PatientList() {
   useEffect(() => {
     const fetchPatients = async () => {
       try {
-        const res = await axiosInstance.get(patientRoutes.getAll + auth._id, {
-          headers: { Authorization: `Basic ${token}` },
+        const res = await fetchData({
+          route: patientRoutes.getAll,
+          id: auth._id,
+          token: token,
         });
-        setPatients(res.data.patients);
+        setPatients(res?.data?.patients);
       } catch (error) {
         console.log(error);
       }
