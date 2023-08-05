@@ -6,7 +6,7 @@ Dao Book is clinic management software built for Traditional Chinese Medicine (T
 
 **Client:** Vite, React, React Router, TailwindCSS.
 
-**Server:** Node, Express, Mongo, Mongoose ([repo here](https://github.com/danwillcoder/dao-book_Backend)
+**Server:** Node, Express, Mongo, Mongoose ([repo here](https://github.com/danwillcoder/dao-book_Backend))
 
 ## Libraries
 
