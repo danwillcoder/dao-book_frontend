@@ -39,7 +39,7 @@ Other installation may be possible with `npm`. EG:
 
 ## Testing
 
-This project is unit & integration tested with [Vitest](https://vitest.dev/) and (React Testing Library)[https://testing-library.com/docs/react-testing-library/intro/]. To run unit tests, install as above, then run the below.
+This project is unit & integration tested with [Vitest](https://vitest.dev/) and [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/). To run unit tests, install as above, then run the below.
 
 ```bash
 pnpm test
