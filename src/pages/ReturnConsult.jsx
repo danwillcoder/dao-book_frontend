@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import {
-  axiosInstance,
   patientRoutes,
   sessionRoutes,
   prescriptionRoutes,
@@ -10,6 +9,7 @@ import useErrorHandler from "../hooks/errorHandler";
 import useAuth from "../hooks/useAuth";
 import { useLocation } from "react-router-dom/dist";
 import { dateTimeToDate } from "../utils";
+import { fetchData, sendData } from "../api/requests";
 
 function ReturnConsult() {
   // Hooks
@@ -46,8 +46,10 @@ function ReturnConsult() {
   useEffect(() => {
     const fetchPatients = async () => {
       try {
-        const res = await axiosInstance.get(patientRoutes.getAll + auth._id, {
-          headers: { Authorization: `Basic ${token}` },
+        const res = await fetchData({
+          route: patientRoutes.getAll,
+          id: auth._id,
+          token: token,
         });
         setPatients(res.data.patients);
 
@@ -67,20 +69,18 @@ function ReturnConsult() {
     // If we're editing, we need to get previous data
     const fetchSessionDetails = async () => {
       try {
-        const sessionRes = await axiosInstance.get(
-          sessionRoutes.getOne + selectedSessionId,
-          {
-            headers: { Authorization: `Basic ${token}` },
-          }
-        );
+        const sessionRes = await fetchData({
+          route: sessionRoutes.getOne,
+          id: selectedSessionId,
+          token: token,
+        });
         const returnedSessionData = sessionRes.data?.session;
 
-        const prescriptionRes = await axiosInstance.get(
-          prescriptionRoutes.getOne + selectedSessionId,
-          {
-            headers: { Authorization: `Basic ${token}` },
-          }
-        );
+        const prescriptionRes = await fetchData({
+          route: prescriptionRoutes.getOne,
+          id: selectedSessionId,
+          token: token,
+        });
         const returnedPrescriptionData = prescriptionRes.data?.prescriptions[0];
 
         let prevSessionDate;
@@ -114,6 +114,7 @@ function ReturnConsult() {
     };
 
     fetchPatients();
+
     // If there is a session, we need to fetch session details. We're editing
     if (selectedSessionId) {
       fetchSessionDetails();
@@ -150,43 +151,44 @@ function ReturnConsult() {
     // If there's a session, we're editing, so put requests
     if (selectedSessionId) {
       try {
-        const sessionRes = await axiosInstance.put(
-          sessionRoutes.put + formData.sessionId,
-          sessionData,
-          {
-            headers: { Authorization: `Bearer ${token}` },
-          }
-        );
+        const sessionRes = await sendData({
+          route: sessionRoutes.put,
+          id: formData.sessionId,
+          token: token,
+          data: sessionData,
+          method: "PUT",
+        });
 
-        const prescriptionRes = await axiosInstance.put(
-          // Update with prescriptionId from session
-          prescriptionRoutes.put + formData.prescriptionId,
-          prescriptionData,
-          { headers: { Authorization: `Bearer ${token}` } }
-        );
+        const prescriptionRes = await sendData({
+          route: prescriptionRoutes.put,
+          id: formData.prescriptionId,
+          token: token,
+          data: prescriptionData,
+          method: "PUT",
+        });
       } catch (error) {
         errorHandler(error, setError);
       }
     } else {
       // If there's no session, this is a new session, so we post
       try {
-        const sessionRes = await axiosInstance.post(
-          sessionRoutes.create,
-          sessionData,
-          {
-            headers: { Authorization: `Bearer ${token}` },
-          }
-        );
+        const sessionRes = await sendData({
+          route: sessionRoutes.create,
+          token: token,
+          data: sessionData,
+          method: "POST",
+        });
 
         // Use returned sessionId to send prescription
         const sessionId = sessionRes.data.session._id;
         prescriptionData.sessionId = sessionId;
 
-        const prescriptionRes = await axiosInstance.post(
-          prescriptionRoutes.create,
-          prescriptionData,
-          { headers: { Authorization: `Bearer ${token}` } }
-        );
+        const prescriptionRes = await sendData({
+          route: prescriptionRoutes.create,
+          token: token,
+          data: prescriptionData,
+          method: "POST",
+        });
       } catch (error) {
         errorHandler(error, setError);
       }

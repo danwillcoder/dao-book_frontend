@@ -1,7 +1,8 @@
-import { useState, useEffect } from "react";
-import useAuth from "../hooks/useAuth";
-import { axiosInstance, patientViewRoutes } from "../api/routes";
+import { useEffect, useState } from "react";
+import { fetchData } from "../api/requests";
+import { patientViewRoutes } from "../api/routes";
 import SessionList from "../components/SessionList";
+import useAuth from "../hooks/useAuth";
 
 function PatientDashboard() {
   const { token, auth } = useAuth();
@@ -14,14 +15,13 @@ function PatientDashboard() {
     const fetchPatientSessions = async () => {
       try {
         // Fetch data
-        const res = await axiosInstance(
-          patientViewRoutes.getSessions + patientId,
-          {
-            headers: { Authorization: `Bearer ${token}` },
-          }
-        );
+        const res = await fetchData({
+          route: patientViewRoutes.getSessions,
+          id: patientId,
+          token: token,
+        });
+
         // Pull out the data into a var to make it easier to work with
-        console.log(res);
         const patientSessions = res?.data?.sessions;
         setSessionsLoading(false);
         setSessionsData(patientSessions);

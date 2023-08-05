@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { axiosInstance, patientViewRoutes } from "../api/routes";
+import { patientViewRoutes } from "../api/routes";
 import useErrorHandler from "../hooks/errorHandler";
 import useAuth from "../hooks/useAuth";
 import { dateTimeToDate } from "../utils";
 import DetailDisplay from "../molecules/DetailDisplay";
 import Button from "../atoms/Button";
+import { fetchData } from "../api/requests";
 
 function PatientSessions() {
   // Hooks
@@ -23,21 +24,21 @@ function PatientSessions() {
   useEffect(() => {
     const fetchSessionDetails = async () => {
       try {
-        const sessionRes = await axiosInstance.get(
-          patientViewRoutes.getOneSession + selectedSessionId,
-          {
-            headers: { Authorization: `Basic ${token}` },
-          }
-        );
+        const sessionRes = await fetchData({
+          route: patientViewRoutes.getOneSession,
+          id: selectedSessionId,
+          token: token,
+        });
         const returnedSessionData = sessionRes.data?.session;
 
-        const prescriptionRes = await axiosInstance.get(
-          patientViewRoutes.getPrescriptions + selectedPatientId,
-          {
-            headers: { Authorization: `Basic ${token}` },
-          }
-        );
+        const prescriptionRes = await fetchData({
+          route: patientViewRoutes.getPrescriptions,
+          id: selectedPatientId,
+          token: token,
+        });
         const returnedPrescriptionData = prescriptionRes.data?.prescriptions;
+
+        // Backend returns all prescriptions, here we filter
         const currentPrescription = returnedPrescriptionData.find(
           (el) => el.sessionId === selectedSessionId
         );

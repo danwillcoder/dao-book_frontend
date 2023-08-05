@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
-import { axiosInstance, patientRoutes, sessionRoutes } from "../api/routes";
+import { useParams } from "react-router-dom";
+import { fetchData, sendData } from "../api/requests";
+import { patientRoutes, sessionRoutes } from "../api/routes";
 import TextLink from "../atoms/TextLink";
 import PatientInfoSubform from "../components/PatientInfoForm";
+import SessionList from "../components/SessionList";
 import useAuth from "../hooks/useAuth";
 import { dateTimeToDate } from "../utils";
-import SessionList from "../components/SessionList";
 
 function PatientDetails() {
   const { token } = useAuth();
@@ -28,9 +29,12 @@ function PatientDetails() {
     const fetchPatientDetails = async () => {
       try {
         // Fetch data
-        const res = await axiosInstance(patientRoutes.getOne + patientId, {
-          headers: { Authorization: `Bearer ${token}` },
+        const res = await fetchData({
+          route: patientRoutes.getOne,
+          id: patientId,
+          token: token,
         });
+
         // Pull out the data into a var to make it easier to work with
         const currentData = res.data.patient;
         // Fix date field to only contain date, otherwise it contains time info too
@@ -47,9 +51,12 @@ function PatientDetails() {
     const fetchPatientSessions = async () => {
       try {
         // Fetch data
-        const res = await axiosInstance(sessionRoutes.getPatients + patientId, {
-          headers: { Authorization: `Bearer ${token}` },
+        const res = await fetchData({
+          route: sessionRoutes.getPatients,
+          id: patientId,
+          token: token,
         });
+
         // Pull out the data into a var to make it easier to work with
         const patientSessions = res?.data?.sessions;
         setSessionsLoading(false);
@@ -67,13 +74,13 @@ function PatientDetails() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axiosInstance.put(
-        patientRoutes.put + patientId,
-        patientInfo,
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      );
+      const res = await sendData({
+        route: patientRoutes.put,
+        id: patientId,
+        token: token,
+        data: patientInfo,
+        method: "PUT",
+      });
     } catch (error) {
       setError(error);
     }

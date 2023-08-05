@@ -1,8 +1,9 @@
 import { useState } from "react";
-import { axiosInstance, patientRoutes } from "../api/routes";
+import { patientRoutes } from "../api/routes";
 import PatientInfoForm from "../components/PatientInfoForm";
 import useAuth from "../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
+import { sendData } from "../api/requests";
 
 function InitialConsultPatient() {
   const { token } = useAuth();
@@ -20,12 +21,14 @@ function InitialConsultPatient() {
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
-  // TODO: submit to backend and update state accordingly (setHasSaved)
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axiosInstance.post(patientRoutes.create, formData, {
-        headers: { Authorization: `Basic ${token}` },
+      const res = await sendData({
+        route: patientRoutes.create,
+        token: token,
+        data: formData,
+        method: "POST",
       });
       // useLocation() hook to get this data in the next page
       setError("");

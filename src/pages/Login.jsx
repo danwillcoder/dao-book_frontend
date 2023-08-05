@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
-import { axiosInstance, pracRoutes } from "../api/routes";
+import { pracRoutes } from "../api/routes";
 import Button from "../atoms/Button";
 import TextLink from "../atoms/TextLink";
 import TitleLockup from "../atoms/TitleLockup";
@@ -8,6 +8,7 @@ import useAuth from "../hooks/useAuth";
 import MemoFormInput from "../molecules/FormInput";
 import { parseJwt } from "../utils.js";
 import { useMediaQuery } from "react-responsive";
+import { fetchData, sendData } from "../api/requests";
 
 function Login() {
   const [formData, setFormData] = useState({
@@ -26,7 +27,12 @@ function Login() {
 
     try {
       // Post form data
-      const res = await axiosInstance.post(pracRoutes.login, formData);
+      const res = await sendData({
+        route: pracRoutes.login,
+        data: formData,
+        method: "POST",
+      });
+
       // Receive JWT and store in both ctx & storage
       const token = res.data.token;
       const decodedToken = parseJwt(token);
@@ -35,10 +41,12 @@ function Login() {
       localStorage.setItem("auth", JSON.stringify(decodedToken));
       localStorage.setItem("authToken", JSON.stringify(res.data.token));
       // Use token to fetch practitioner name
-      const pracNameRes = await axiosInstance.get(
-        pracRoutes.get + decodedToken._id,
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
+      const pracNameRes = await fetchData({
+        route: pracRoutes.get,
+        id: decodedToken._id,
+        token: token,
+      });
+
       // Store full name in ctx & storage
       const { firstName, lastName } = pracNameRes.data.prac;
       const fullName = `${firstName} ${lastName}`;
