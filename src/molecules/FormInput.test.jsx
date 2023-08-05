@@ -27,7 +27,7 @@ describe("Form Input", () => {
         placeholderText="placeholder"
       ></FormInput>
     );
-    screen.debug();
+
     expect(screen.getByPlaceholderText("placeholder")).toHaveAttribute("type");
     expect(
       screen.getByPlaceholderText("placeholder").getAttribute("type")
