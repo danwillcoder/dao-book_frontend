@@ -19,7 +19,7 @@ function AuthProvider({ children }) {
       setAuth();
     }
   }
-  // TODO for persistence, we need to reach into localStorage and check for a token.
+
   return (
     <AuthContext.Provider
       value={{ auth, setAuth, token, setToken, pracName, setPracName }}
