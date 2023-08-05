@@ -1,5 +1,4 @@
 import classNames from "classnames";
-import propTypes from "prop-types";
 
 /**
  @typedef buttonProps
@@ -66,12 +65,5 @@ function Button({
     </button>
   );
 }
-
-Button.propTypes = {
-  theme: propTypes.string,
-  buttonText: propTypes.string,
-  clickHandler: propTypes.func,
-  isFullWidth: propTypes.bool,
-};
 
 export default Button;

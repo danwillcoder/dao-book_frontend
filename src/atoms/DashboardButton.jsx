@@ -1,5 +1,3 @@
-import propTypes from "prop-types";
-
 /**
  @typedef dashboardButtonProps
  @type {Object}
@@ -20,10 +18,5 @@ function DashboardButton({ buttonText, onClick }) {
     </button>
   );
 }
-
-DashboardButton.propTypes = {
-  buttonText: propTypes.string,
-  clickHandler: propTypes.func,
-};
 
 export default DashboardButton;
