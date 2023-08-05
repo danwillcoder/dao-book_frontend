@@ -41,7 +41,7 @@ describe("Form Input", () => {
         labelText="Test String"
         isRequired={true}
         inputValue=""
-        setInputValue={mockFn}
+        onChange={mockFn}
         placeholderText="placeholder"
       ></FormInput>
     );
