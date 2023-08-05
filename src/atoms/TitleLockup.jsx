@@ -1,5 +1,4 @@
 import classNames from "classnames";
-import propTypes from "prop-types";
 
 /**
  @typedef titleProps
@@ -46,10 +45,5 @@ function TitleLockup({ theme, isSubtitled, isSmall }) {
     </div>
   );
 }
-
-TitleLockup.propTypes = {
-  theme: propTypes.string,
-  isSubtitled: propTypes.bool,
-};
 
 export default TitleLockup;
