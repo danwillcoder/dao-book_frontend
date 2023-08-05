@@ -1,13 +1,11 @@
 import { useState, useEffect } from "react";
 import useAuth from "../hooks/useAuth";
-import { useLocation } from "react-router-dom";
 import { axiosInstance, patientViewRoutes } from "../api/routes";
 import SessionList from "../components/SessionList";
 
 function PatientDashboard() {
-  const { token } = useAuth();
-  const location = useLocation();
-  const patientId = location?.state?.patientId;
+  const { token, auth } = useAuth();
+  const patientId = auth._id;
 
   const [sessionsData, setSessionsData] = useState([]);
   const [sessionsLoading, setSessionsLoading] = useState(true);
