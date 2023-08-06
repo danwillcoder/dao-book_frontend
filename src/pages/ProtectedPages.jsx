@@ -2,7 +2,6 @@ import { Outlet } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 import { Navigate } from "react-router-dom";
 import { isJwtExpired } from "../utils";
-import { useMediaQuery } from "react-responsive";
 
 function ProtectedPages() {
   const { auth, token } = useAuth();
