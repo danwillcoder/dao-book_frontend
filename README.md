@@ -28,6 +28,7 @@ Install with pnpm
   git clone https://github.com/danwillcoder/dao-book_frontend
   cd my-project
   pnpm install
+  # set up your env with correct values
   pnpm run dev
 ```
 
