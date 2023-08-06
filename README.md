@@ -2,7 +2,7 @@
 
 Dao Book is clinic management software built for Traditional Chinese Medicine (TCM) practitioners. This is the front end application written in Vite.
 
-Visit the live site [here](https://dao-book.com.au/).
+Visit the live site [here](https://daobook.com.au/).
 
 ## Tech Stack
 
